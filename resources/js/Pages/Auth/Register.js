@@ -37,8 +37,7 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="name" value="Name" />
-
+                    <Label forInput="name" value="Nome" />
                     <Input
                         type="text"
                         name="name"
@@ -52,8 +51,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <Label forInput="email" value="Email" />
-
+                    <Label forInput="email" value="E-mail" />
                     <Input
                         type="email"
                         name="email"
@@ -66,7 +64,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                    <Label forInput="password" value="Senha" />
 
                     <Input
                         type="password"
@@ -80,7 +78,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <Label forInput="password_confirmation" value="Confirm Password" />
+                    <Label forInput="password_confirmation" value="Confirmar senha" />
 
                     <Input
                         type="password"
@@ -93,12 +91,12 @@ export default function Register() {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <InertiaLink href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
+                    {/* <InertiaLink href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
                         Already registered?
-                    </InertiaLink>
+                    </InertiaLink> */}
 
-                    <Button className="ml-4" processing={processing}>
-                        Register
+                    <Button className="w-full bg-blue-700" processing={processing}>
+                        Cadastrar
                     </Button>
                 </div>
             </form>
