@@ -7,8 +7,8 @@ export default function Guest({ children }) {
         <div 
             className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
             style={{
-                backgroundImage: 'url(https://picsum.photos/1000/1000?random=1)',
-                backgroundSize: 'cover',
+                backgroundImage: 'url(https://picsum.photos/1000/300?grayscale)',
+                backgroundSize: 'contain',
                 boxShadow: `inset 100px -800px 500px 50px AliceBlue`,
             }}
         >
