@@ -4,10 +4,17 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 
 export default function Guest({ children }) {
     return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <div 
+            className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
+            style={{
+                backgroundImage: 'url(https://picsum.photos/1000/1000?random=1)',
+                backgroundSize: 'cover',
+                boxShadow: `inset 100px -800px 500px 50px AliceBlue`,
+            }}
+        >
             <div>
                 <InertiaLink href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                    <ApplicationLogo className="w-auto fill-current text-gray-500" />
                 </InertiaLink>
             </div>
 
