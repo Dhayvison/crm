@@ -12,7 +12,6 @@ export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
-        remember: '',
     });
 
     useEffect(() => {
@@ -63,14 +62,13 @@ export default function Login({ status, canResetPassword }) {
                     />
                 </div>
 
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
-                        <span className="ml-2 text-sm text-gray-600">Permanecer conectado</span>
-                    </label>
-                </div>
+                <Input
+                    type="hidden"
+                    name="remember"
+                    value={true}
+                />
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center justify-center mt-4">
                     {/* {canResetPassword && (
                         <InertiaLink
                             href={route('password.request')}
@@ -80,7 +78,7 @@ export default function Login({ status, canResetPassword }) {
                         </InertiaLink>
                     )} */}
 
-                    <Button processing={processing}>
+                    <Button className="w-full bg-blue-700" processing={processing}>
                         Entrar
                     </Button>
                 </div>
