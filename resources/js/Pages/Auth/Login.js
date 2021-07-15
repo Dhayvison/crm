@@ -39,8 +39,7 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="email" value="Email" />
-
+                    <Label forInput="email" value="E-mail" />
                     <Input
                         type="text"
                         name="email"
@@ -53,8 +52,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4">
-                    <Label forInput="password" value="Password" />
-
+                    <Label forInput="password" value="Senha" />
                     <Input
                         type="password"
                         name="password"
@@ -68,23 +66,22 @@ export default function Login({ status, canResetPassword }) {
                 <div className="block mt-4">
                     <label className="flex items-center">
                         <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
-
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                        <span className="ml-2 text-sm text-gray-600">Permanecer conectado</span>
                     </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
+                    {/* {canResetPassword && (
                         <InertiaLink
                             href={route('password.request')}
                             className="underline text-sm text-gray-600 hover:text-gray-900"
                         >
                             Forgot your password?
                         </InertiaLink>
-                    )}
+                    )} */}
 
-                    <Button className="ml-4" processing={processing}>
-                        Log in
+                    <Button processing={processing}>
+                        Entrar
                     </Button>
                 </div>
             </form>
