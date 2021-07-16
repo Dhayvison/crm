@@ -1,6 +1,6 @@
-import Button from '@/Components/Button';
+import Button from '@/Components/StyledButton';
 import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
+import Input from '@/Components/StyledInput';
 import React from 'react';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { useForm } from '@inertiajs/inertia-react';

@@ -1,10 +1,10 @@
-import Button from '@/Components/Button';
+import Button from '@/Components/StyledButton';
 import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import Label from '@/Components/Label';
+import Input from '@/Components/StyledInput';
 import React, { useEffect } from 'react';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { useForm } from '@inertiajs/inertia-react';
+import { Card, Stack } from 'bumbag';
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -30,57 +30,48 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <Guest>
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
-            <ValidationErrors errors={errors} />
-
+            <Card 
+                variant="shadowed" 
+                width='400px'
+            >
             <form onSubmit={submit}>
-                <div>
-                    <Label forInput="email" value="E-mail" />
+
+                <Stack spacing="major-4">
                     <Input
                         type="text"
                         name="email"
+                        label="E-mail"
                         value={data.email}
-                        className="mt-1 block w-full"
                         autoComplete="username"
                         isFocused={true}
                         handleChange={onHandleChange}
                     />
-                </div>
-
-                <div className="mt-4">
-                    <Label forInput="password" value="Senha" />
+                        
                     <Input
                         type="password"
                         name="password"
+                        label="Senha"
                         value={data.password}
-                        className="mt-1 block w-full"
                         autoComplete="current-password"
                         handleChange={onHandleChange}
                     />
-                </div>
 
-                <Input
-                    type="hidden"
-                    name="remember"
-                    value={true}
-                />
+                    <Input
+                        type="hidden"
+                        name="remember"
+                        value={true}
+                    />
 
-                <div className="flex items-center justify-center mt-4">
-                    {/* {canResetPassword && (
-                        <InertiaLink
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900"
-                        >
-                            Forgot your password?
-                        </InertiaLink>
-                    )} */}
-
-                    <Button className="w-full bg-blue-700" processing={processing}>
+                    <Button 
+                        isLoading={processing}
+                        width='100%'
+                        palette="primary"
+                    >
                         Entrar
-                    </Button>
-                </div>
+                    </Button>    
+                </Stack>
             </form>
+            </Card>
         </Guest>
     );
 }

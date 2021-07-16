@@ -1,4 +1,4 @@
-import Button from '@/Components/Button';
+import Button from '@/Components/StyledButton';
 import Guest from '@/Layouts/Guest';
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
