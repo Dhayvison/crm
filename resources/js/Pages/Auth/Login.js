@@ -34,6 +34,8 @@ export default function Login({ status, canResetPassword }) {
                 variant="shadowed" 
                 width='400px'
             >
+            
+            <ValidationErrors errors={errors} />
             <form onSubmit={submit}>
 
                 <Stack spacing="major-4">
