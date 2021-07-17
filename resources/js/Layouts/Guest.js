@@ -7,10 +7,6 @@ export default function Guest({ children }) {
     const { theme } = useTheme();
     const { colorMode } = useColorMode();
 
-    React.useEffect(()=>{
-        console.log(colorMode);
-    })
-
     return (
         <Box
             width='100vw'
