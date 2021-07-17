@@ -1,10 +1,8 @@
 import ApplicationLogo from '../Components/ApplicationLogo';
-import Dropdown from '../Components/Dropdown';
 import NavLink from '../Components/NavLink';
-import React, { useState } from 'react';
-import ResponsiveNavLink from '../Components/ResponsiveNavLink';
+import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import { Box, Button, Container, Divider, DropdownMenu, Image, Switch, Text, TopNav, useColorMode } from 'bumbag';
+import { Box, Button, Container, DropdownMenu, Switch, Text, TopNav, useColorMode } from 'bumbag';
 
 export default function Authenticated({ auth, header, children }) {
     const { colorMode, setColorMode } = useColorMode();
@@ -19,20 +17,14 @@ export default function Authenticated({ auth, header, children }) {
                 <Container>
                     <TopNav>
                         <TopNav.Section>
-                            <TopNav.Item href="https://bumbag.style" fontWeight="semibold">
-                                <InertiaLink href="/">
-                                    <ApplicationLogo className="block h-9 w-auto text-gray-500" />
-                                </InertiaLink>
+                            <TopNav.Item use={(props) => {return <InertiaLink href="/" {...props}/>}}>
+                                <ApplicationLogo className="block h-9 w-auto" />
                             </TopNav.Item>
-                            <TopNav.Item href="#">
-                                <NavLink href={route('administrar')} active={route().current('administrar')}>
-                                    <Text color='text'>Administrar</Text>
-                                </NavLink>
+                            <TopNav.Item use={(props) => {return <NavLink href={route('administrar')} active={route().current('administrar')} {...props}/>}}>
+                                Administrar
                             </TopNav.Item>
-                            <TopNav.Item href="#">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    <Text color='text'>Dashboard</Text>
-                                </NavLink>
+                            <TopNav.Item use={(props) => {return <NavLink href={route('dashboard')} active={route().current('dashboard')} {...props}/>}}>
+                                Dashboard
                             </TopNav.Item>
                         </TopNav.Section>
                         <TopNav.Section>
@@ -66,6 +58,19 @@ export default function Authenticated({ auth, header, children }) {
                     </TopNav>
                 </Container>
             </Box>
+
+            {header && (
+                <Box 
+                    backgroundColor='primary'
+                    altitude='100'
+                    paddingX='minor-1'
+                    paddingY='minor-2'
+                >
+                    <Container>
+                       <Text color='white' use='strong'>{header}</Text> 
+                    </Container>
+                </Box>
+            )}
             
             <Container>
                 {children}
