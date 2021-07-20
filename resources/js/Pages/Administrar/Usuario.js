@@ -1,13 +1,13 @@
 import Authenticated from '@/Layouts/Authenticated';
 import React from 'react';
 // import { InertiaLink } from '@inertiajs/inertia-react';
-import { Table } from 'bumbag';
+import { Table, textStyles } from 'bumbag';
 
 export default function Administrar(props) {
   const { users } = props;
 
   React.useEffect(()=>{
-    console.log(users);
+    console.log(props);
   }, [])
 
   return (
@@ -16,8 +16,6 @@ export default function Administrar(props) {
       errors={props.errors}
       header={'Usuários'}
     >
-      
-
       <Table isResponsive isStriped>
         <Table.Head>
           <Table.Row>
@@ -31,7 +29,13 @@ export default function Administrar(props) {
         <Table.Body>
           {users.map((user)=>{
             return (
-              <Table.Row key={user.id}>
+              <Table.Row 
+                key={user.id}
+                {...(user.id === props.auth.user.id && {
+                  backgroundColor: "primary",
+                  color: 'white'
+                })}
+              >
                 <Table.Cell>{user.id}</Table.Cell>
                 <Table.Cell>{user.name}</Table.Cell>
                 <Table.Cell textAlign="center">{user.email}</Table.Cell>
