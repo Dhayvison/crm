@@ -7,7 +7,7 @@ export default function Administrar(props) {
   const { users } = props;
 
   React.useEffect(()=>{
-    console.log(props);
+    document.title = "Usuários"
   }, [])
 
   return (

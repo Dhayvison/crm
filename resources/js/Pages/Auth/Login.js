@@ -13,6 +13,7 @@ export default function Login({ status, canResetPassword }) {
     });
 
     useEffect(() => {
+        document.title = "Login"
         return () => {
             reset('password');
         };

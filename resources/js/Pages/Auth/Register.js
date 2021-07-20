@@ -6,6 +6,7 @@ import React, { useEffect } from 'react';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { useForm } from '@inertiajs/inertia-react';
+import { Card, Stack } from 'bumbag';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -16,6 +17,7 @@ export default function Register() {
     });
 
     useEffect(() => {
+        document.title = "Registrar Usuário"
         return () => {
             reset('password', 'password_confirmation');
         };
@@ -33,73 +35,65 @@ export default function Register() {
 
     return (
         <Guest>
+            <Card
+                variant="shadowed" 
+                width='400px'
+            >
             <ValidationErrors errors={errors} />
-
             <form onSubmit={submit}>
-                <div>
-                    <Label forInput="name" value="Nome" />
+
+                <Stack spacing="major-4">
                     <Input
                         type="text"
                         name="name"
+                        label="Nome"
                         value={data.name}
-                        className="mt-1 block w-full"
                         autoComplete="name"
                         isFocused={true}
                         handleChange={onHandleChange}
                         required
                     />
-                </div>
 
-                <div className="mt-4">
-                    <Label forInput="email" value="E-mail" />
                     <Input
                         type="email"
                         name="email"
+                        label="E-mail"
                         value={data.email}
-                        className="mt-1 block w-full"
                         autoComplete="username"
                         handleChange={onHandleChange}
                         required
                     />
-                </div>
-
-                <div className="mt-4">
-                    <Label forInput="password" value="Senha" />
 
                     <Input
                         type="password"
                         name="password"
+                        label="Senha"
                         value={data.password}
-                        className="mt-1 block w-full"
                         autoComplete="new-password"
                         handleChange={onHandleChange}
                         required
                     />
-                </div>
-
-                <div className="mt-4">
-                    <Label forInput="password_confirmation" value="Confirmar senha" />
 
                     <Input
                         type="password"
                         name="password_confirmation"
+                        label="Confirmar senha"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
                         handleChange={onHandleChange}
                         required
                     />
-                </div>
 
-                <div className="flex items-center justify-end mt-4">
-                    {/* <InertiaLink href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
-                        Already registered?
-                    </InertiaLink> */}
-
-                    <Button className="w-full bg-blue-700" processing={processing}>
+                    <Button 
+                        processing={processing}
+                        width='100%'
+                        palette="primary"
+                    >
                         Cadastrar
                     </Button>
-                </div>
+
+                </Stack>
             </form>
+            </Card>
         </Guest>
     );
 }
