@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +33,8 @@ Route::get('/', function () {
 //     return Inertia::render('Administrar');
 // })->middleware(['auth', 'verified'])->name('administrar');
 
-Route::get('/administrar/usuarios', function () {
-    return Inertia::render('Administrar/Usuario');
-})->middleware(['auth', 'verified'])->name('administrar.usuarios');
+Route::prefix('administrar')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/usuarios', [UsersController::class, 'index'])->name('administrar.usuarios');
+});
 
 require __DIR__ . '/auth.php';

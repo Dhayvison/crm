@@ -1,39 +1,47 @@
 import Authenticated from '@/Layouts/Authenticated';
 import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
-import { Alert, Box, Columns, SideNav } from 'bumbag';
+// import { InertiaLink } from '@inertiajs/inertia-react';
+import { Table } from 'bumbag';
 
 export default function Administrar(props) {
-    return (
-        <Authenticated
-            auth={props.auth}
-            errors={props.errors}
-            header={'Usuários'}
-        >
-            {/* <Columns marginTop='major-2'>
-                <Columns.Column spread={3}>
-                    <Box 
-                        borderRadius="4" 
-                        border="default"
-                        paddingY='major-2'
-                    >
-                        <SideNav>
-                            <SideNav.Level>
-                                <SideNav.Item use={(props) => {return <InertiaLink href={route('administrar.usuarios')} active={route().current('administrar.usuarios')} {...props}/>}} >
-                                    Usuários
-                                </SideNav.Item>
-                            </SideNav.Level>
-                        </SideNav>
-                    </Box>
-                </Columns.Column>
-                <Columns.Column spread={9}>
-                    {props.children}
-                </Columns.Column>
-            </Columns> */}
+  const { users } = props;
 
-            <Alert title='funcionou' type='success'>
-              Você está na página de gerencia de usuários
-            </Alert>
-        </Authenticated>
-    );
+  React.useEffect(()=>{
+    console.log(users);
+  }, [])
+
+  return (
+    <Authenticated
+      auth={props.auth}
+      errors={props.errors}
+      header={'Usuários'}
+    >
+      
+
+      <Table isResponsive isStriped>
+        <Table.Head>
+          <Table.Row>
+            <Table.HeadCell>#</Table.HeadCell>
+            <Table.HeadCell>Nome</Table.HeadCell>
+            <Table.HeadCell textAlign="center">E-mail</Table.HeadCell>
+            <Table.HeadCell>Registro</Table.HeadCell>
+            <Table.HeadCell>Última atualização</Table.HeadCell>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          {users.map((user)=>{
+            return (
+              <Table.Row key={user.id}>
+                <Table.Cell>{user.id}</Table.Cell>
+                <Table.Cell>{user.name}</Table.Cell>
+                <Table.Cell textAlign="center">{user.email}</Table.Cell>
+                <Table.Cell>{new Date(user.createdAt).toLocaleString()}</Table.Cell>
+                <Table.Cell>{new Date(user.updatedAt).toLocaleString()}</Table.Cell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
+      </Table>
+    </Authenticated>
+  );
 }
