@@ -20,8 +20,21 @@ export default function Authenticated({ auth, header, children }) {
                             <TopNav.Item use={(props) => {return <InertiaLink href="/" {...props}/>}}>
                                 <ApplicationLogo className="block h-9 w-auto" />
                             </TopNav.Item>
-                            <TopNav.Item use={(props) => {return <NavLink href={route('administrar')} active={route().current('administrar')} {...props}/>}}>
-                                Administrar
+                            <TopNav.Item>
+                                <DropdownMenu
+                                    menu={
+                                        <React.Fragment>
+                                            <DropdownMenu.Item padding='0'>
+                                                <InertiaLink href={route('administrar.usuarios')} method="get" className='block w-full px-4 py-2'>
+                                                    Usuários
+                                                </InertiaLink>
+                                            </DropdownMenu.Item>
+                                        </React.Fragment>
+                                    }
+                                    
+                                >
+                                    <Button variant="ghost" margin='major-2' iconAfter="chevron-down">Administrar</Button>
+                                </DropdownMenu>
                             </TopNav.Item>
                             <TopNav.Item use={(props) => {return <NavLink href={route('dashboard')} active={route().current('dashboard')} {...props}/>}}>
                                 Dashboard
