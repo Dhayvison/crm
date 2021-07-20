@@ -28,8 +28,12 @@ Route::get('/', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/administrar', function () {
-    return Inertia::render('Administrar');
-})->middleware(['auth', 'verified'])->name('administrar');
+// Route::get('/administrar', function () {
+//     return Inertia::render('Administrar');
+// })->middleware(['auth', 'verified'])->name('administrar');
+
+Route::get('/administrar/usuarios', function () {
+    return Inertia::render('Administrar/Usuario');
+})->middleware(['auth', 'verified'])->name('administrar.usuarios');
 
 require __DIR__ . '/auth.php';
