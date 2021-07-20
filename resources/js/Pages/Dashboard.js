@@ -3,6 +3,10 @@ import React from 'react';
 import { Alert } from 'bumbag'
  
 export default function Dashboard(props) {
+    React.useEffect(()=>{
+        document.title = "Dashboard";
+    }, []);
+    
     return (
         <Authenticated
             auth={props.auth}
