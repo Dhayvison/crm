@@ -1,7 +1,7 @@
 import Authenticated from '@/Layouts/Authenticated';
 import React from 'react';
-// import { InertiaLink } from '@inertiajs/inertia-react';
-import { Table, textStyles } from 'bumbag';
+import { InertiaLink } from '@inertiajs/inertia-react';
+import { Button, Flex, Modal, Table } from 'bumbag';
 
 export default function Administrar(props) {
   const { users } = props;
@@ -16,7 +16,16 @@ export default function Administrar(props) {
       errors={props.errors}
       header={'Usuários'}
     >
-      <Table isResponsive isStriped>
+      <Flex alignX="right">
+        <Button 
+          palette="primary"
+          use={(props)=> <InertiaLink href={route('register')} {...props}/>}
+        >
+          Novo usuário
+        </Button>
+      </Flex>
+
+      <Table isResponsive isStriped marginTop='major-2'>
         <Table.Head>
           <Table.Row>
             <Table.HeadCell>#</Table.HeadCell>
