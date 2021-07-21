@@ -1,7 +1,7 @@
 import Authenticated from '@/Layouts/Authenticated';
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import { Button, Flex, Table } from 'bumbag';
+import { Button, Dialog, Flex, Modal, Table } from 'bumbag';
 
 export default function Administrar(props) {
   const { users } = props;
@@ -59,7 +59,27 @@ export default function Administrar(props) {
                   >
                     🖊
                   </Button>
-                  <Button variant='ghost' palette="danger" borderRadius='7'>🗑</Button>
+                  
+                  <Modal.State>
+                    <Dialog.Modal
+                      showActionButtons
+                      actionButtonsProps={{
+                        submitProps: { palette: 'danger'},
+                        cancelText: "Cancelar",
+                        submitText: "Sim, desativar",
+                        onClickSubmit: () => console.log('submitted'),
+                        onClickCancel: () => console.log('cancel')
+                      }}
+                      type="danger"
+                      variant="alert"
+                      title="Desativar usuário"
+                    >
+                      Tem certeza que deseja desativar o usuário {user.name}?
+                    </Dialog.Modal>
+                    <Modal.Disclosure use={Button} variant='ghost' palette="danger" borderRadius='7'>
+                      🗑
+                    </Modal.Disclosure>
+                  </Modal.State>
                 </Table.Cell>
               </Table.Row>
             );
