@@ -1,7 +1,7 @@
 import Authenticated from '@/Layouts/Authenticated';
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import { Button, Flex, Modal, Table } from 'bumbag';
+import { Button, Flex, Table } from 'bumbag';
 
 export default function Administrar(props) {
   const { users } = props;
@@ -33,6 +33,7 @@ export default function Administrar(props) {
             <Table.HeadCell textAlign="center">E-mail</Table.HeadCell>
             <Table.HeadCell>Registro</Table.HeadCell>
             <Table.HeadCell>Última atualização</Table.HeadCell>
+            <Table.HeadCell textAlign="center">Ações</Table.HeadCell>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -50,6 +51,16 @@ export default function Administrar(props) {
                 <Table.Cell textAlign="center">{user.email}</Table.Cell>
                 <Table.Cell>{new Date(user.createdAt).toLocaleString()}</Table.Cell>
                 <Table.Cell>{new Date(user.updatedAt).toLocaleString()}</Table.Cell>
+                <Table.Cell textAlign="center">
+                  <Button
+                    variant='ghost' 
+                    borderRadius='7' 
+                    use={(props)=> <InertiaLink href={route('administrar.usuarios')} {...props}/>}
+                  >
+                    🖊
+                  </Button>
+                  <Button variant='ghost' palette="danger" borderRadius='7'>🗑</Button>
+                </Table.Cell>
               </Table.Row>
             );
           })}

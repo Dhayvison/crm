@@ -16,7 +16,7 @@ class UsersController extends Controller
    */
   public function index()
   {
-    return Inertia::render('Administrar/Usuario', [
+    return Inertia::render('Administrar/Usuario/Index', [
       'users' => User::all()->map(function ($user) {
         return [
           'id' => $user->id,
