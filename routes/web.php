@@ -37,4 +37,6 @@ Route::prefix('administrar')->middleware(['auth', 'verified'])->group(function (
     Route::get('/usuarios', [UsersController::class, 'index'])->name('administrar.usuarios');
 });
 
+Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user.delete');
+
 require __DIR__ . '/auth.php';
