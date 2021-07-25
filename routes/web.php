@@ -38,5 +38,6 @@ Route::prefix('administrar')->middleware(['auth', 'verified'])->group(function (
 });
 
 Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user.delete');
+Route::put('/user/{id}', [UsersController::class, 'update'])->name('user.update');
 
 require __DIR__ . '/auth.php';

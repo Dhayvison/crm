@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -28,6 +29,16 @@ class UsersController extends Controller
         ];
       })
     ]);
+  }
+
+  public function update(Request $request, $id)
+  {
+    $newData = $request->only('name', 'email');
+    $user = User::find($id);
+    $user->name = $newData['name'];
+    $user->email = $newData['email'];
+    $user->save();
+    return redirect(route('administrar.usuarios'));
   }
 
   public function delete($id)
