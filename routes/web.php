@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +37,13 @@ Route::get('/', function () {
 
 Route::prefix('administrar')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/usuarios', [UsersController::class, 'index'])->name('administrar.usuarios');
+    Route::get('/colaboradores', [EmployeesController::class, 'index'])->name('administrar.colaboradores');
+    Route::get('/cargos', [RolesController::class, 'index'])->name('administrar.cargos');
+    Route::get('/cargos/create', [RolesController::class, 'create'])->name('administrar.cargos.create');
 });
 
 Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user.delete');
 Route::put('/user/{id}', [UsersController::class, 'update'])->name('user.update');
+Route::post('/roles/register', [RolesController::class, 'store'])->name('cargos.create');
 
 require __DIR__ . '/auth.php';
