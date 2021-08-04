@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RolesCollection;
 use App\Models\Roles;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+
 
 class RolesController extends Controller
 {
@@ -15,18 +17,11 @@ class RolesController extends Controller
    * @param  int  $id
    * @return \Illuminate\View\View
    */
-  public function index()
+  public function index(Request $request)
   {
+    // $roles = Roles::paginate(5);
     return Inertia::render('Administrar/Cargos/Index', [
-      'roles' => Roles::all()->map(function ($role) {
-        return [
-          'id' => $role->id,
-          'name' => $role->name,
-          'wages' => $role->wages,
-          'createdAt' =>  $role->created_at,
-          'updatedAt' => $role->updated_at
-        ];
-      })
+      'roles' => new RolesCollection(Roles::orderBy('name')->paginate(15))
     ]);
   }
 

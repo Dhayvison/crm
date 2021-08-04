@@ -1,12 +1,14 @@
 import React from 'react';
-import { Button, Flex, Modal, Table } from 'bumbag';
+import { Button, Divider, Flex, Modal, Table } from 'bumbag';
 import Authenticated from '@/Layouts/Authenticated';
+import Pagination from '@/Components/Pagination';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import Create from './Create';
 
 export default function Index(props) {
   const { auth, errors } = props;
   const { roles } = props;
+  const { data, meta } = roles;
 
   React.useEffect(() => {
     document.title = 'Cargos';
@@ -18,7 +20,7 @@ export default function Index(props) {
         <Create />
       </Flex>
 
-      <Table isResponsive isStriped marginTop='major-2'>
+      <Table isResponsive isStriped marginY='major-2'>
         <Table.Head>
           <Table.Row>
             <Table.HeadCell>#</Table.HeadCell>
@@ -30,7 +32,7 @@ export default function Index(props) {
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {roles.map((role) => (
+          {data.map((role) => (
             <Table.Row key={role.id}>
               <Table.Cell>{role.id}</Table.Cell>
               <Table.Cell>{role.name}</Table.Cell>
@@ -45,6 +47,7 @@ export default function Index(props) {
           ))}
         </Table.Body>
       </Table>
+      <Pagination meta={meta} />
     </Authenticated>
   );
 }
