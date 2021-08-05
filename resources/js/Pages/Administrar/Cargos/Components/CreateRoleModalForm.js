@@ -57,37 +57,31 @@ export default function Create() {
           onClickSubmit: submit,
         }}
         title='Registrar Cargo'
+        use='form'
         {...modal}
       >
         <ValidationErrors errors={formErrors} />
-        <form onSubmit={submit}>
-          <Stack spacing='major-4'>
-            <Input
-              type='text'
-              name='name'
-              label='Nome'
-              value={data.name}
-              isFocused
-              handleChange={onHandleChange}
-              required
-            />
+        <Stack spacing='major-4'>
+          <Input
+            type='text'
+            name='name'
+            label='Nome'
+            value={data.name}
+            isFocused
+            handleChange={onHandleChange}
+            required
+          />
 
-            <Input
-              type='number'
-              name='wages'
-              label='Salário'
-              value={data.wages}
-              handleChange={onHandleChange}
-              required
-            />
-          </Stack>
-        </form>
+          <Input
+            type='number'
+            name='wages'
+            label='Salário'
+            value={data.wages}
+            handleChange={onHandleChange}
+            required
+          />
+        </Stack>
       </Dialog.Modal>
-      {/* <Modal {...modal}>
-        <Card variant='shadowed' width='400px' title='Registrar novo cargo' backgroundColor=''>
-          
-        </Card>
-      </Modal> */}
     </>
   );
 }
