@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Table, Textarea } from 'bumbag';
+import { Flex, Table } from 'bumbag';
 import Authenticated from '@/Layouts/Authenticated';
 import Pagination from '@/Components/Pagination';
 
@@ -16,7 +16,8 @@ export default function Index(props) {
 
   return (
     <Authenticated auth={auth} errors={errors} header='Cargos'>
-      <Flex alignX='right'>
+      <Flex alignX='right' justifyContent='space-between'>
+        <Pagination meta={meta} />
         <Create />
       </Flex>
 
@@ -47,7 +48,6 @@ export default function Index(props) {
           ))}
         </Table.Body>
       </Table>
-      <Pagination meta={meta} />
     </Authenticated>
   );
 }

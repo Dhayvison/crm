@@ -9,8 +9,25 @@ require('./bootstrap');
 
 const el = document.getElementById('app');
 
+const theme = {
+  Select: {
+    styles: {
+      base: {
+        background: 'var(--bb-palette-default)',
+      },
+    },
+    Icon: {
+      styles: {
+        base: {
+          top: '0',
+        },
+      },
+    },
+  },
+};
+
 render(
-  <BumbagProvider>
+  <BumbagProvider theme={theme}>
     <App
       initialPage={JSON.parse(el.dataset.page)}
       resolveComponent={(name) => require(`./Pages/${name}`).default}
