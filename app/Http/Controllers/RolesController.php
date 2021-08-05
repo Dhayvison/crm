@@ -21,7 +21,7 @@ class RolesController extends Controller
   {
     // $roles = Roles::paginate(5);
     return Inertia::render('Administrar/Cargos/Index', [
-      'roles' => new RolesCollection(Roles::orderBy('name')->paginate(15))
+      'roles' => new RolesCollection(Roles::orderBy('name')->paginate())
     ]);
   }
 

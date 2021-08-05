@@ -8,7 +8,7 @@ export default function Authenticated({ auth, header, children }) {
   const { colorMode, setColorMode } = useColorMode();
 
   return (
-    <Box width='100vw' height='100vh' backgroundColor='default'>
+    <Box width='100vw' height='100vh' overflow='overlay' backgroundColor='default'>
       <Box altitude='100'>
         <Container>
           <TopNav>

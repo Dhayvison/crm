@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Divider, Flex, Modal, Table } from 'bumbag';
+import { Flex, Table, Textarea } from 'bumbag';
 import Authenticated from '@/Layouts/Authenticated';
 import Pagination from '@/Components/Pagination';
-import { InertiaLink } from '@inertiajs/inertia-react';
+
 import Create from './Create';
 
 export default function Index(props) {
