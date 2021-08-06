@@ -30,6 +30,8 @@ Route::prefix('administrar')->middleware(['auth', 'verified'])->group(function (
 
 Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user.delete');
 Route::put('/user/{id}', [UsersController::class, 'update'])->name('user.update');
-Route::post('/roles/register', [RolesController::class, 'store'])->name('cargos.create');
+Route::post('/roles/register', [RolesController::class, 'store'])->name('roles.create');
+Route::put('/roles/{id}', [RolesController::class, 'update'])->name('roles.update');
+Route::delete('/roles/{id}', [RolesController::class, 'delete'])->name('roles.delete');
 
 require __DIR__ . '/auth.php';

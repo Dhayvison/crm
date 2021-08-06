@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Table, Text } from 'bumbag';
+import UpdateRoleModalForm from './UpdateRoleModalForm';
+import DeleteRoleDialog from './DeleteRoleDialog';
 
 export default function RolesTable({ roles }) {
   return (
@@ -11,7 +13,7 @@ export default function RolesTable({ roles }) {
           <Table.HeadCell>Salário</Table.HeadCell>
           <Table.HeadCell>Registro</Table.HeadCell>
           <Table.HeadCell>Última atualização</Table.HeadCell>
-          {/* <Table.HeadCell textAlign='center'>Ações</Table.HeadCell> */}
+          <Table.HeadCell textAlign='center'>Ações</Table.HeadCell>
         </Table.Row>
       </Table.Head>
       <Table.Body>
@@ -26,10 +28,10 @@ export default function RolesTable({ roles }) {
             </Table.Cell>
             <Table.Cell>{new Date(role.createdAt).toLocaleString()}</Table.Cell>
             <Table.Cell>{new Date(role.updatedAt).toLocaleString()}</Table.Cell>
-            {/* <Table.Cell textAlign='center'>
-                <UpdateUserModal user={role} />
-                <DeleteUserDialog user={role} />
-              </Table.Cell> */}
+            <Table.Cell textAlign='center'>
+              <UpdateRoleModalForm role={role} />
+              <DeleteRoleDialog role={role} />
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

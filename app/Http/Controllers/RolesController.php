@@ -17,9 +17,8 @@ class RolesController extends Controller
    * @param  int  $id
    * @return \Illuminate\View\View
    */
-  public function index(Request $request)
+  public function index()
   {
-    // $roles = Roles::paginate(5);
     return Inertia::render('Administrar/Cargos/Index', [
       'roles' => new RolesCollection(Roles::orderBy('name')->paginate())
     ]);
@@ -58,20 +57,20 @@ class RolesController extends Controller
     return redirect(route('administrar.cargos'));
   }
 
-  // public function update(Request $request, $id)
-  // {
-  //   $newData = $request->only('name', 'email');
-  //   $user = Roles::find($id);
-  //   $user->name = $newData['name'];
-  //   $user->email = $newData['email'];
-  //   $user->save();
-  //   return redirect(route('administrar.usuarios'));
-  // }
+  public function update(Request $request, $id)
+  {
+    $newData = $request->only('name', 'wages');
+    $role = Roles::find($id);
+    $role->name = $newData['name'];
+    $role->wages = $newData['wages'];
+    $role->save();
+    return redirect(route('administrar.cargos'));
+  }
 
-  // public function delete($id)
-  // {
-  //   $user = Roles::find($id);
-  //   $user->delete();
-  //   return redirect(route('administrar.usuarios'));
-  // }
+  public function delete($id)
+  {
+    $role = Roles::find($id);
+    $role->delete();
+    return redirect(route('administrar.cargos'));
+  }
 }
