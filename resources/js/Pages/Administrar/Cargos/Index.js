@@ -18,7 +18,7 @@ export default function Index(props) {
   return (
     <Authenticated auth={auth} errors={errors} header='Cargos'>
       <Flex alignX='right' justifyContent='space-between'>
-        <Pagination meta={meta} />
+        <Pagination meta={meta} route={route('administrar.cargos')} />
         <CreateRoleModalForm />
       </Flex>
       <RolesTable roles={data} />

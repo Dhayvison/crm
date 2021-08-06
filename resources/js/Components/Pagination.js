@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Pagination } from 'bumbag';
 import { Inertia } from '@inertiajs/inertia';
 
-export default function Index({ meta }) {
+export default function Index({ meta, route }) {
   const { current_page: current, last_page: lastPage } = meta;
   const [currentPage] = React.useState(current);
 
@@ -13,7 +13,7 @@ export default function Index({ meta }) {
       prepositionText='de'
       currentPage={currentPage}
       onChangePage={(page) => {
-        Inertia.get(route('administrar.cargos', { page }));
+        Inertia.get(route, { page });
       }}
       numberOfPages={lastPage}
     />
