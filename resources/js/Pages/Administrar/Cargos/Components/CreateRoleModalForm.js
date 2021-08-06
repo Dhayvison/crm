@@ -19,13 +19,6 @@ export default function Create() {
     wages: '',
   });
 
-  React.useEffect(() => {
-    document.title = 'Registrar Novo Cargo';
-    return () => {
-      reset('name', 'wages');
-    };
-  }, []);
-
   const onHandleChange = (event) => {
     setData(
       event.target.name,
@@ -37,6 +30,7 @@ export default function Create() {
     e.preventDefault();
     post(route('roles.create'), {
       onSuccess: () => {
+        reset('name', 'wages');
         modal.hide();
       },
     });
