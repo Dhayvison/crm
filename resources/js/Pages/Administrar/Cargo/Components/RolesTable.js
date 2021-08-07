@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Table, Text } from 'bumbag';
 import DeleteModelDialog from '@/Components/DeleteModelDialog';
 import UpdateRoleModalForm from './UpdateRoleModalForm';
-import DeleteRoleDialog from './DeleteRoleDialog';
 
 export default function RolesTable({ roles }) {
   return (
