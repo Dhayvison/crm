@@ -3,12 +3,12 @@ import { useForm } from '@inertiajs/inertia-react';
 import { Button, Dialog, Modal, Text } from 'bumbag';
 import ValidationErrors from '@/Components/ValidationErrors';
 
-export default function DeleteRoleDialog({ role }) {
+export default function DeleteModelDialog({ deleteRoute, title, modelName }) {
   const modal = Modal.useState();
   const { processing, errors, delete: destroy } = useForm({});
 
   const submit = () => {
-    destroy(route('roles.delete', { id: role.id }), {
+    destroy(deleteRoute, {
       onSuccess: () => {
         modal.hide();
       },
@@ -34,10 +34,10 @@ export default function DeleteRoleDialog({ role }) {
           onClickSubmit: submit,
         }}
         type='danger'
-        title='Deletar'
+        title={title}
         {...modal}
       >
-        Tem certeza que deseja deletar o cargo <Text use='strong'>{role.name}</Text>?
+        Tem certeza que deseja deletar <Text use='strong'>{modelName}</Text>?
         <ValidationErrors errors={errors} />
       </Dialog.Modal>
     </>

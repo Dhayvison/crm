@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Table, Text } from 'bumbag';
+import DeleteModelDialog from '@/Components/DeleteModelDialog';
 import UpdateTeamModalForm from './UpdateTeamModalForm';
-import DeleteTeamDialog from './DeleteTeamDialog';
 
 export default function TeamsTable({ teams }) {
   return (
@@ -28,7 +28,11 @@ export default function TeamsTable({ teams }) {
             <Table.Cell>{new Date(team.updatedAt).toLocaleString()}</Table.Cell>
             <Table.Cell textAlign='center'>
               <UpdateTeamModalForm team={team} />
-              <DeleteTeamDialog team={team} />
+              <DeleteModelDialog
+                deleteRoute={route('teams.delete', { id: team.id })}
+                modelName={team.name}
+                title='Deletar Time'
+              />
             </Table.Cell>
           </Table.Row>
         ))}

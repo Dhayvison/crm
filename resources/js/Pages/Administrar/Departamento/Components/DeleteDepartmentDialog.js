@@ -37,7 +37,7 @@ export default function DeleteDepartmentDialog({ department }) {
         title='Deletar'
         {...modal}
       >
-        Tem certeza que deseja deletar o departamento <Text use='strong'>{department.name}</Text>?
+        Tem certeza que deseja desativar o departamento <Text use='strong'>{department.name}</Text>?
         <ValidationErrors errors={errors} />
       </Dialog.Modal>
     </>
