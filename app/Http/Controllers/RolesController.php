@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RolesCollection;
-use App\Models\Roles;
+use App\Models\Role;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class RolesController extends Controller
   public function index()
   {
     return Inertia::render('Administrar/Cargos/Index', [
-      'roles' => new RolesCollection(Roles::orderBy('name')->paginate())
+      'roles' => new RolesCollection(Role::orderBy('name')->paginate())
     ]);
   }
 
@@ -49,7 +49,7 @@ class RolesController extends Controller
       'wages' => 'required|numeric',
     ]);
 
-    Roles::create([
+    Role::create([
       'name' => $request->name,
       'wages' => $request->wages,
     ]);
@@ -60,7 +60,7 @@ class RolesController extends Controller
   public function update(Request $request, $id)
   {
     $newData = $request->only('name', 'wages');
-    $role = Roles::find($id);
+    $role = Role::find($id);
     $role->name = $newData['name'];
     $role->wages = $newData['wages'];
     $role->save();
@@ -69,7 +69,7 @@ class RolesController extends Controller
 
   public function delete($id)
   {
-    $role = Roles::find($id);
+    $role = Role::find($id);
     $role->delete();
     return redirect(route('administrar.cargos'));
   }
