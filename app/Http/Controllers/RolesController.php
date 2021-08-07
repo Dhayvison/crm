@@ -19,7 +19,7 @@ class RolesController extends Controller
    */
   public function index()
   {
-    return Inertia::render('Administrar/Cargos/Index', [
+    return Inertia::render('Administrar/Cargo/Index', [
       'roles' => new RolesCollection(Role::orderBy('name')->paginate())
     ]);
   }
