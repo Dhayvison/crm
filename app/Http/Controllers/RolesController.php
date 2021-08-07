@@ -25,16 +25,6 @@ class RolesController extends Controller
   }
 
   /**
-   * Display the registration view.
-   *
-   * @return \Illuminate\View\View
-   */
-  public function create()
-  {
-    return Inertia::render('Administrar/Cargos/Create');
-  }
-
-  /**
    * Handle an incoming registration request.
    *
    * @param  \Illuminate\Http\Request  $request

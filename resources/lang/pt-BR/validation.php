@@ -78,9 +78,9 @@ return [
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [
-        'numeric' => 'The :attribute must not be greater than :max.',
-        'file' => 'The :attribute must not be greater than :max kilobytes.',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'numeric' => 'O :attribute não deve exceder :max.',
+        'file' => 'O :attribute não deve exceder :max kilobytes.',
+        'string' => 'O :attribute não deve exceder :max caracteres.',
         'array' => 'The :attribute must not have more than :max items.',
     ],
     'mimes' => 'The :attribute must be a file of type: :values.',

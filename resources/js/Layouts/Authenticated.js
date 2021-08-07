@@ -4,6 +4,25 @@ import { Box, Button, Container, DropdownMenu, Switch, Text, TopNav, useColorMod
 import NavLink from '../Components/NavLink';
 import ApplicationLogo from '../Components/ApplicationLogo';
 
+const ADMINISTRAR_MENU_ITEMS = [
+  {
+    routeName: 'administrar.usuarios',
+    text: 'Usuários',
+  },
+  {
+    routeName: 'administrar.colaboradores',
+    text: 'Colaboradores',
+  },
+  {
+    routeName: 'administrar.cargos',
+    text: 'Cargos',
+  },
+  {
+    routeName: 'administrar.departamentos',
+    text: 'Departamentos',
+  },
+];
+
 export default function Authenticated({ auth, header, children }) {
   const { colorMode, setColorMode } = useColorMode();
 
@@ -18,37 +37,17 @@ export default function Authenticated({ auth, header, children }) {
               </TopNav.Item>
               <TopNav.Item>
                 <DropdownMenu
-                  menu={
-                    <>
-                      <DropdownMenu.Item padding='0'>
-                        <InertiaLink
-                          href={route('administrar.usuarios')}
-                          method='get'
-                          className='block w-full px-4 py-2'
-                        >
-                          Usuários
-                        </InertiaLink>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item padding='0'>
-                        <InertiaLink
-                          href={route('administrar.colaboradores')}
-                          method='get'
-                          className='block w-full px-4 py-2'
-                        >
-                          Colaboradores
-                        </InertiaLink>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item padding='0'>
-                        <InertiaLink
-                          href={route('administrar.cargos')}
-                          method='get'
-                          className='block w-full px-4 py-2'
-                        >
-                          Cargos
-                        </InertiaLink>
-                      </DropdownMenu.Item>
-                    </>
-                  }
+                  menu={ADMINISTRAR_MENU_ITEMS.map((menuItem) => (
+                    <DropdownMenu.Item padding='0'>
+                      <InertiaLink
+                        href={route(menuItem.routeName)}
+                        method='get'
+                        className='block w-full px-4 py-2'
+                      >
+                        {menuItem.text}
+                      </InertiaLink>
+                    </DropdownMenu.Item>
+                  ))}
                 >
                   <Button variant='ghost' margin='major-2' iconAfter='chevron-down'>
                     Administrar

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Input } from 'bumbag';
+import { Input, Textarea } from 'bumbag';
 
 export default function StyledInput({
   type = 'text',
@@ -19,7 +19,16 @@ export default function StyledInput({
     }
   }, []);
 
-  return (
+  return type === 'textarea' ? (
+    <Textarea
+      name={name}
+      label={label}
+      value={value}
+      ref={input}
+      required={required}
+      onChange={(e) => handleChange(e)}
+    />
+  ) : (
     <Input
       type={type}
       name={name}
