@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\TeamsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,15 +29,22 @@ Route::prefix('administrar')->middleware(['auth', 'verified'])->group(function (
     Route::get('/colaboradores', [EmployeesController::class, 'index'])->name('administrar.colaboradores');
     Route::get('/cargos', [RolesController::class, 'index'])->name('administrar.cargos');
     Route::get('/departamentos', [DepartmentsController::class, 'index'])->name('administrar.departamentos');
+    Route::get('/times', [TeamsController::class, 'index'])->name('administrar.times');
 });
 
 Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user.delete');
 Route::put('/user/{id}', [UsersController::class, 'update'])->name('user.update');
+
 Route::post('/roles/register', [RolesController::class, 'store'])->name('roles.create');
 Route::put('/roles/{id}', [RolesController::class, 'update'])->name('roles.update');
 Route::delete('/roles/{id}', [RolesController::class, 'delete'])->name('roles.delete');
+
 Route::post('/departments/register', [DepartmentsController::class, 'store'])->name('departments.create');
 Route::put('/departments/{id}', [DepartmentsController::class, 'update'])->name('departments.update');
 Route::delete('/departments/{id}', [DepartmentsController::class, 'delete'])->name('departments.delete');
+
+Route::post('/teams/register', [TeamsController::class, 'store'])->name('teams.create');
+Route::put('/teams/{id}', [TeamsController::class, 'update'])->name('teams.update');
+Route::delete('/teams/{id}', [TeamsController::class, 'delete'])->name('teams.delete');
 
 require __DIR__ . '/auth.php';

@@ -21,6 +21,10 @@ const ADMINISTRAR_MENU_ITEMS = [
     routeName: 'administrar.departamentos',
     text: 'Departamentos',
   },
+  {
+    routeName: 'administrar.times',
+    text: 'Times',
+  },
 ];
 
 export default function Authenticated({ auth, header, children }) {
