@@ -47,4 +47,8 @@ Route::post('/teams/register', [TeamsController::class, 'store'])->name('teams.c
 Route::put('/teams/{id}', [TeamsController::class, 'update'])->name('teams.update');
 Route::delete('/teams/{id}', [TeamsController::class, 'delete'])->name('teams.delete');
 
+Route::post('/employees/register', [EmployeesController::class, 'store'])->name('employees.create');
+Route::put('/employees/{id}', [EmployeesController::class, 'update'])->name('employees.update');
+Route::delete('/employees/{id}', [EmployeesController::class, 'delete'])->name('employees.delete');
+
 require __DIR__ . '/auth.php';
