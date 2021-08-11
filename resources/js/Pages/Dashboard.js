@@ -12,7 +12,7 @@ export default function Dashboard(props) {
   return (
     <Authenticated auth={auth} errors={errors} header='Dashboard'>
       <Alert title='Tudo certo!' type='success'>
-        Você está logado. Na página de Dashboard.
+        Você está logado.
       </Alert>
     </Authenticated>
   );
