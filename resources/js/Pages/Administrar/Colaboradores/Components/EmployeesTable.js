@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Table, Text } from 'bumbag';
-// import DeleteModelDialog from '@/Components/DeleteModelDialog';
-// import UpdateRoleModalForm from './UpdateRoleModalForm';
+import DeleteModelDialog from '@/Components/DeleteModelDialog';
+import UpdateEmployeeModalForm from './UpdateEmployeeModalForm';
 
-export default function EmployeesTable({ employees }) {
+export default function EmployeesTable({ employees, users, roles, departments, teams }) {
   return (
     <Table isResponsive isStriped marginY='major-2'>
       <Table.Head>
@@ -35,12 +35,18 @@ export default function EmployeesTable({ employees }) {
             <Table.Cell>{new Date(employee.birthDate).toLocaleString()}</Table.Cell>
             <Table.Cell>{new Date(employee.hiringDate).toLocaleString()}</Table.Cell>
             <Table.Cell textAlign='center'>
-              {/* <UpdateRoleModalForm role={role} />
+              <UpdateEmployeeModalForm
+                employee={employee}
+                users={users}
+                roles={roles}
+                departments={departments}
+                teams={teams}
+              />
               <DeleteModelDialog
-                deleteRoute={route('roles.delete', { id: role.id })}
-                modelName={role.name}
-                title='Deletar Cargo'
-              /> */}
+                deleteRoute={route('employees.delete', { id: employee.id })}
+                modelName={employee.fullName}
+                title='Deletar Colaborador'
+              />
             </Table.Cell>
           </Table.Row>
         ))}

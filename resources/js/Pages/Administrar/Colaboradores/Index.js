@@ -28,7 +28,13 @@ export default function Index(props) {
           teams={formData.teams}
         />
       </Flex>
-      <EmployeesTable employees={data} />
+      <EmployeesTable
+        employees={data}
+        users={formData.users}
+        roles={formData.roles}
+        departments={formData.departments}
+        teams={formData.teams}
+      />
     </Authenticated>
   );
 }
