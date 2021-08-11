@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Employee;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class EmployeesResource extends JsonResource
@@ -20,10 +21,11 @@ class EmployeesResource extends JsonResource
       'birthDate' => $this->birth_date,
       'hiringDate' => $this->hiring_date,
       'phone' => $this->phone,
-      'userId' => $this->user_id,
-      'departmentId' => $this->department_id,
-      'teamId' => $this->team_id,
-      'roleId' => $this->role_id,
+      'cellphone' => $this->cellphone,
+      'user' => Employee::find(1)->user,
+      'department' => Employee::find(1)->department,
+      'team' => Employee::find(1)->team,
+      'role' => Employee::find(1)->role,
       'createdAt' => $this->created_at,
       'updatedAt' => $this->updated_at,
     ];
