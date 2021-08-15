@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dialog, Modal, Button, Stack, FieldStack } from 'bumbag';
+import { Dialog, Modal, Button, FieldStack } from 'bumbag';
 import { useForm } from '@inertiajs/inertia-react';
 import ValidationErrors from '@/Components/ValidationErrors';
 import Input from '@/Components/StyledInput';
