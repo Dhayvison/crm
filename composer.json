@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -38,6 +41,15 @@
         }
     },
     "scripts": {
+        "compile": [
+            "npm run prod",
+            "@php artisan migrate:fresh --force",
+            "@php artisan db:seed --force"
+        ],
+        "reseed": [
+            "@php artisan migrate:fresh",
+            "@php artisan db:seed"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
