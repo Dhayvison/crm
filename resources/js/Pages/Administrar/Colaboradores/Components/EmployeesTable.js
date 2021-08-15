@@ -32,8 +32,12 @@ export default function EmployeesTable({ employees, users, roles, departments, t
             <Table.Cell>{employee.role.name}</Table.Cell>
             <Table.Cell>{employee.team.name}</Table.Cell>
             <Table.Cell>{employee.department.name}</Table.Cell>
-            <Table.Cell>{new Date(employee.birthDate).toLocaleString()}</Table.Cell>
-            <Table.Cell>{new Date(employee.hiringDate).toLocaleString()}</Table.Cell>
+            <Table.Cell>
+              {new Date(employee.birthDate).toLocaleDateString('pt-br', { timeZone: 'UTC' })}
+            </Table.Cell>
+            <Table.Cell>
+              {new Date(employee.hiringDate).toLocaleDateString('pt-br', { timeZone: 'UTC' })}
+            </Table.Cell>
             <Table.Cell textAlign='center'>
               <UpdateEmployeeModalForm
                 employee={employee}

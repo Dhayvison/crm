@@ -9,8 +9,8 @@ export default function UpdateEmployeeModalForm({ employee, users, roles, depart
   const modal = Modal.useState();
   const { data, setData, processing, errors, put } = useForm({
     fullName: employee.fullName,
-    birthDate: employee.birthDate,
-    hiringDate: employee.hiringDate,
+    birthDate: employee.birthDate.substring(0, 10),
+    hiringDate: employee.hiringDate.substring(0, 10),
     phone: employee.phone,
     cellphone: employee.cellphone,
     userId: employee.user.id,
