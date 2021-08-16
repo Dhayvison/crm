@@ -42,7 +42,7 @@
     },
     "scripts": {
         "compile": [
-            "yarn prod",
+            "yarn install && yarn prod",
             "@php artisan migrate:fresh --force",
             "@php artisan db:seed --force"
         ],
