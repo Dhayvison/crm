@@ -45,8 +45,8 @@
             "yarn install",
             "yarn prod",
             "touch database/database.sqlite",
-            "@php artisan migrate:fresh --force",
-            "@php artisan db:seed --force"
+            "php artisan migrate",
+            "php artisan db:seed"
         ],
         "reseed": [
             "@php artisan migrate:fresh",
