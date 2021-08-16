@@ -42,7 +42,9 @@
     },
     "scripts": {
         "compile": [
-            "npm run prod"
+            "npm run prod",
+            "@php artisan migrate:fresh --force",
+            "@php artisan db:seed --force"
         ],
         "reseed": [
             "@php artisan migrate:fresh",
