@@ -42,7 +42,9 @@
     },
     "scripts": {
         "compile": [
-            "yarn install && yarn prod",
+            "yarn install",
+            "yarn prod",
+            "touch database/database.sqlite",
             "@php artisan migrate:fresh --force",
             "@php artisan db:seed --force"
         ],
