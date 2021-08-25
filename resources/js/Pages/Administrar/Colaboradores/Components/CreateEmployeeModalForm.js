@@ -1,10 +1,9 @@
 import React from 'react';
+import { useForm } from '@inertiajs/inertia-react';
 import { Dialog, FieldStack, Modal } from 'bumbag';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import Select from '@/Components/StyledSelect';
-import ValidationErrors from '@/Components/ValidationErrors';
-import { useForm } from '@inertiajs/inertia-react';
 
 export default function Create({ users, roles, departments, teams }) {
   const modal = Modal.useState();
@@ -71,13 +70,13 @@ export default function Create({ users, roles, departments, teams }) {
         use='form'
         {...modal}
       >
-        <ValidationErrors errors={formErrors} />
         <FieldStack>
           <Input
             type='text'
             name='fullName'
             label='Nome Completo'
             value={data.fullName}
+            error={formErrors.fullName && 'Insira o nome completo do colaborador'}
             isFocused
             handleChange={onHandleChange}
             required
@@ -89,6 +88,7 @@ export default function Create({ users, roles, departments, teams }) {
               name='birthDate'
               label='Data de Nascimento'
               value={data.birthDate}
+              error={formErrors.birthDate && 'Insira a data de nascimento'}
               handleChange={onHandleChange}
               required
             />
@@ -97,6 +97,7 @@ export default function Create({ users, roles, departments, teams }) {
               name='hiringDate'
               label='Data de Contratação'
               value={data.hiringDate}
+              error={formErrors.hiringDate && 'Insira a data de contratação'}
               handleChange={onHandleChange}
               required
             />
@@ -107,6 +108,7 @@ export default function Create({ users, roles, departments, teams }) {
               name='phone'
               label='Telefone'
               value={data.phone}
+              error={formErrors.phone && 'Insira um telefone válido'}
               handleChange={onHandleChange}
               required
             />
@@ -116,6 +118,7 @@ export default function Create({ users, roles, departments, teams }) {
               name='cellphone'
               label='Telefone celular'
               value={data.cellphone}
+              error={formErrors.cellphone && 'Insira um celular válido'}
               handleChange={onHandleChange}
               required
             />
@@ -126,6 +129,7 @@ export default function Create({ users, roles, departments, teams }) {
             label='E-mail'
             options={users.map((user) => ({ label: user.email, value: user.id }))}
             value={data.userId}
+            error={formErrors.userId && 'Selecione o e-mail associado ao colaborador'}
             handleChange={onHandleChange}
           />
 
@@ -134,6 +138,7 @@ export default function Create({ users, roles, departments, teams }) {
             label='Cargo'
             options={roles.map((role) => ({ label: role.name, value: role.id }))}
             value={data.roleId}
+            error={formErrors.roleId && 'Selecione o cargo'}
             handleChange={onHandleChange}
           />
 
@@ -146,6 +151,7 @@ export default function Create({ users, roles, departments, teams }) {
                 value: department.id,
               }))}
               value={data.departmentId}
+              error={formErrors.departmentId && 'Selecione o departamento'}
               handleChange={onHandleChange}
             />
 
@@ -154,6 +160,7 @@ export default function Create({ users, roles, departments, teams }) {
               label='Time'
               options={teams.map((team) => ({ label: team.name, value: team.id }))}
               value={data.teamId}
+              error={formErrors.teamId && 'Selecione o time'}
               handleChange={onHandleChange}
             />
           </FieldStack>

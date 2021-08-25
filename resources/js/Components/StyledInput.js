@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { Input, Textarea } from 'bumbag';
+import { FieldWrapper, Input, Textarea } from 'bumbag';
 
 export default function StyledInput({
   type = 'text',
   name,
   label,
   value,
+  error,
   autoComplete,
   required,
   isFocused,
@@ -29,15 +30,17 @@ export default function StyledInput({
       onChange={(e) => handleChange(e)}
     />
   ) : (
-    <Input
-      type={type}
-      name={name}
-      label={label}
-      value={value}
-      ref={input}
-      autoComplete={autoComplete}
-      required={required}
-      onChange={(e) => handleChange(e)}
-    />
+    <FieldWrapper validationText={error} state={error && 'danger'}>
+      <Input
+        type={type}
+        name={name}
+        label={label}
+        value={value}
+        ref={input}
+        autoComplete={autoComplete}
+        required={required}
+        onChange={(e) => handleChange(e)}
+      />
+    </FieldWrapper>
   );
 }

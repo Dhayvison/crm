@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Select, applyTheme } from 'bumbag';
+import { Select, applyTheme, FieldWrapper } from 'bumbag';
 
 const StyledSelect = applyTheme(Select, {
   styles: {
@@ -9,17 +9,19 @@ const StyledSelect = applyTheme(Select, {
   },
 });
 
-export default function Styled({ name, value, handleChange, label, options }) {
+export default function Styled({ name, value, error, handleChange, label, options }) {
   const input = React.useRef();
   return (
-    <StyledSelect
-      name={name}
-      value={value}
-      onChange={(e) => handleChange(e)}
-      ref={input}
-      width='100%'
-      label={label}
-      options={options}
-    />
+    <FieldWrapper validationText={error} state={error && 'danger'}>
+      <StyledSelect
+        name={name}
+        value={value}
+        onChange={(e) => handleChange(e)}
+        ref={input}
+        width='100%'
+        label={label}
+        options={options}
+      />
+    </FieldWrapper>
   );
 }

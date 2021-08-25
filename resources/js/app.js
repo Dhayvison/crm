@@ -24,6 +24,16 @@ const theme = {
       },
     },
   },
+  FieldWrapper: {
+    ValidationText: {
+      styles: {
+        base: {
+          padding: 'minor-1',
+          fontWeight: 'bold',
+        },
+      },
+    },
+  },
 };
 
 render(
