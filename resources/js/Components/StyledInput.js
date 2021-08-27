@@ -11,6 +11,7 @@ export default function StyledInput({
   required,
   isFocused,
   handleChange,
+  inputProps,
 }) {
   const input = useRef();
 
@@ -40,6 +41,7 @@ export default function StyledInput({
         autoComplete={autoComplete}
         required={required}
         onChange={(e) => handleChange(e)}
+        {...inputProps}
       />
     </FieldWrapper>
   );
