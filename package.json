@@ -38,7 +38,8 @@
         "tailwindcss": "^2.1.2"
     },
     "dependencies": {
-        "bumbag": "^2.2.1"
+        "bumbag": "^2.2.1",
+        "moment": "^2.29.1"
     },
     "eslintConfig": {
         "extends": [
