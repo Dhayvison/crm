@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Avatar, FieldStack, Flex } from 'bumbag';
+import { Avatar, FieldStack, Flex, Text } from 'bumbag';
 import { useDebouncedCallback } from 'use-debounce';
 import { useForm } from '@inertiajs/inertia-react';
+import moment from 'moment';
 
 import Input from '@/Components/StyledInput';
 
@@ -71,6 +72,7 @@ function CurrentUserForm({ user }) {
             isLoading: processing,
           }}
         />
+        <Text use='sub'>Atualizado {moment(user.updated_at).fromNow()}</Text>
       </FieldStack>
     </Flex>
   );
