@@ -25,10 +25,14 @@ class UsersController extends Controller
 
   public function update(Request $request, $id)
   {
-    $newData = $request->only('name', 'email');
+    $request->validate([
+      'name' => 'required|string|max:255',
+      'email' => 'required|email'
+    ]);
+
     $user = User::find($id);
-    $user->name = $newData['name'];
-    $user->email = $newData['email'];
+    $user->name = $request->name;
+    $user->email = $request->email;
     $user->save();
     return redirect(route('administrar.usuarios'));
   }

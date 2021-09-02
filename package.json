@@ -39,7 +39,8 @@
     },
     "dependencies": {
         "bumbag": "^2.2.1",
-        "moment": "^2.29.1"
+        "moment": "^2.29.1",
+        "use-debounce": "^7.0.0"
     },
     "eslintConfig": {
         "extends": [
