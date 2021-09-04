@@ -118,7 +118,7 @@ export default function Authenticated({ auth, header, children }) {
         </Box>
       )}
 
-      <Container paddingTop='major-2'>{children}</Container>
+      <Container paddingY='major-2'>{children}</Container>
     </Box>
   );
 }
