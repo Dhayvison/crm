@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { useForm } from '@inertiajs/inertia-react';
-import { Button, Dialog, Modal, Stack } from 'bumbag';
-import ValidationErrors from '@/Components/ValidationErrors';
+import { Dialog, Stack } from 'bumbag';
 import Input from '@/Components/StyledInput';
 
-export default function UpdateUserModal({ user }) {
-  const modal = Modal.useState();
+export default function UpdateUserModal({ user, modalProps }) {
   const { data, setData, processing, errors, put } = useForm({
-    name: user.name,
-    email: user.email,
+    id: 0,
+    name: '',
+    email: '',
   });
 
   const onHandleChange = (event) => {
@@ -20,59 +19,59 @@ export default function UpdateUserModal({ user }) {
 
   const submit = (e) => {
     e.preventDefault();
-    put(route('user.update', { id: user.id }), {
+    put(route('user.update', { id: data.id }), {
       onSuccess: () => {
-        modal.hide();
+        modalProps.hide();
       },
     });
   };
 
-  return (
-    <>
-      <Modal.Disclosure
-        use={React.forwardRef((props, ref) => (
-          <Button innerRef={ref} variant='ghost' borderRadius='7' {...props} />
-        ))}
-        {...modal}
-      >
-        🖊
-      </Modal.Disclosure>
-      <Dialog.Modal
-        showActionButtons
-        actionButtonsProps={{
-          submitProps: { isLoading: processing },
-          submitText: 'Salvar',
-          cancelText: 'Cancelar',
-          onClickSubmit: submit,
-        }}
-        title='Editar usuário'
-        use='form'
-        {...modal}
-      >
-        <ValidationErrors errors={errors} />
-        <Stack spacing='major-4'>
-          <Input
-            type='text'
-            name='name'
-            label='Nome'
-            value={data.name}
-            autoComplete='name'
-            isFocused
-            handleChange={onHandleChange}
-            required
-          />
+  React.useEffect(() => {
+    if (user) {
+      setData({ id: user.id, name: user.name, email: user.email });
+    }
+  }, [user]);
 
-          <Input
-            type='email'
-            name='email'
-            label='E-mail'
-            value={data.email}
-            autoComplete='username'
-            handleChange={onHandleChange}
-            required
-          />
-        </Stack>
-      </Dialog.Modal>
-    </>
+  return (
+    <Dialog.Modal
+      showActionButtons
+      actionButtonsProps={{
+        submitProps: { isLoading: processing },
+        submitText: 'Salvar',
+        cancelText: 'Cancelar',
+        onClickSubmit: submit,
+      }}
+      title='Editar usuário'
+      use='form'
+      {...modalProps}
+    >
+      {user && (
+        <>
+          <Stack spacing='major-4'>
+            <Input
+              type='text'
+              name='name'
+              label='Nome'
+              value={data.name}
+              error={errors.name && 'Nome não pode ser vazio'}
+              autoComplete='name'
+              handleChange={onHandleChange}
+              required
+            />
+
+            <Input
+              type='email'
+              name='email'
+              label='E-mail'
+              value={data.email}
+              error={errors.email}
+              autoComplete='email'
+              handleChange={onHandleChange}
+              required
+            />
+          </Stack>
+        </>
+      )}
+    </Dialog.Modal>
   );
 }
