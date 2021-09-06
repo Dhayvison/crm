@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, Modal, Table } from 'bumbag';
 import moment from 'moment';
+import Icon from '@/Components/Icon';
 import DeleteUserDialog from './DeleteUserDialog';
 import UpdateUserModalForm from './UpdateUserModalForm';
 
@@ -53,7 +54,7 @@ export default function UsersTable({ users, authUserId }) {
                     updateModal.show();
                   }}
                 >
-                  🖊
+                  <Icon name='edit' />
                 </Button>
                 <Button
                   variant='ghost'
@@ -65,7 +66,7 @@ export default function UsersTable({ users, authUserId }) {
                     deleteModal.show();
                   }}
                 >
-                  🗑
+                  <Icon name='delete' />
                 </Button>
               </Table.Cell>
             </Table.Row>

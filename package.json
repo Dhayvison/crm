@@ -39,6 +39,7 @@
     },
     "dependencies": {
         "bumbag": "^2.2.1",
+        "material-icons": "^1.2.1",
         "moment": "^2.29.1",
         "use-debounce": "^7.0.0"
     },
