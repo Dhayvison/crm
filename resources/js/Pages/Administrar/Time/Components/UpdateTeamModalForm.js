@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Dialog, Modal, Button, Stack } from 'bumbag';
+import { Dialog, Stack } from 'bumbag';
 import { useForm } from '@inertiajs/inertia-react';
-import ValidationErrors from '@/Components/ValidationErrors';
+
 import Input from '@/Components/StyledInput';
 
-export default function UpdateTeamModalForm({ team }) {
-  const modal = Modal.useState();
+export default function UpdateTeamModalForm({ team, modalProps }) {
   const { data, setData, processing, errors, put } = useForm({
-    name: team.name,
-    description: team.description,
+    id: 0,
+    name: '',
+    description: '',
   });
 
   const onHandleChange = (event) => {
@@ -20,57 +20,54 @@ export default function UpdateTeamModalForm({ team }) {
 
   const submit = (e) => {
     e.preventDefault();
-    put(route('teams.update', { id: team.id }), {
+    put(route('teams.update', { id: data.id }), {
       onSuccess: () => {
-        modal.hide();
+        modalProps.hide();
       },
     });
   };
 
-  return (
-    <>
-      <Modal.Disclosure
-        use={React.forwardRef((props, ref) => (
-          <Button innerRef={ref} variant='ghost' borderRadius='7' {...props} />
-        ))}
-        {...modal}
-      >
-        🖊
-      </Modal.Disclosure>
-      <Dialog.Modal
-        showActionButtons
-        actionButtonsProps={{
-          submitProps: { isLoading: processing },
-          submitText: 'Salvar',
-          cancelText: 'Cancelar',
-          onClickSubmit: submit,
-        }}
-        title='Editar Time'
-        use='form'
-        {...modal}
-      >
-        <ValidationErrors errors={errors} />
-        <Stack spacing='major-4'>
-          <Input
-            type='text'
-            name='name'
-            label='Nome'
-            value={data.name}
-            isFocused
-            handleChange={onHandleChange}
-            required
-          />
+  React.useEffect(() => {
+    if (team) {
+      setData({ id: team.id, name: team.name, description: team.description });
+    }
+  }, [team]);
 
-          <Input
-            type='textarea'
-            name='description'
-            label='Descrição'
-            value={data.description}
-            handleChange={onHandleChange}
-            required
-          />
-        </Stack>
-      </Dialog.Modal>
-    </>
+  return (
+    <Dialog.Modal
+      showActionButtons
+      actionButtonsProps={{
+        submitProps: { isLoading: processing },
+        submitText: 'Salvar',
+        cancelText: 'Cancelar',
+        onClickSubmit: submit,
+      }}
+      title='Editar Time'
+      use='form'
+      {...modalProps}
+    >
+      <Stack spacing='major-4'>
+        <Input
+          type='text'
+          name='name'
+          label='Nome'
+          value={data.name}
+          error={errors.name}
+          isFocused
+          handleChange={onHandleChange}
+          required
+        />
+
+        <Input
+          type='textarea'
+          name='description'
+          label='Descrição'
+          value={data.description}
+          erro={errors.description}
+          handleChange={onHandleChange}
+          required
+        />
+      </Stack>
+    </Dialog.Modal>
   );
 }

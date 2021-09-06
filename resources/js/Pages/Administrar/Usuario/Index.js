@@ -3,6 +3,7 @@ import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { Button, Flex } from 'bumbag';
 import Pagination from '@/Components/Pagination';
+import Icon from '@/Components/Icon';
 import UsersTable from './Components/UsersTable';
 import { CurrentUserForm } from './Components/CurrentUserForm';
 
@@ -24,7 +25,7 @@ export default function Index(props) {
           palette='primary'
           use={(prop) => <InertiaLink href={route('register')} {...prop} />}
         >
-          Novo usuário
+          <Icon name='person_add' spacing={1} /> Novo usuário
         </Button>
       </Flex>
 

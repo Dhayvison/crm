@@ -4,6 +4,7 @@ import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { useForm } from '@inertiajs/inertia-react';
+import Icon from '@/Components/Icon';
 
 export default function Create() {
   const modal = Modal.useState();
@@ -39,6 +40,7 @@ export default function Create() {
   return (
     <>
       <Modal.Disclosure use={Button} {...modal}>
+        <Icon name='groups' spacing={1} />
         Novo Departamento
       </Modal.Disclosure>
       <Dialog.Modal

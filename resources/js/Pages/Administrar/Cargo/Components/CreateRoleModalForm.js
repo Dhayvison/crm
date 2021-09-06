@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, Dialog, Modal, Stack } from 'bumbag';
+import { Dialog, Modal, Stack } from 'bumbag';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { useForm } from '@inertiajs/inertia-react';
+import Icon from '@/Components/Icon';
 
 export default function Create() {
   const modal = Modal.useState();
@@ -39,7 +40,7 @@ export default function Create() {
   return (
     <>
       <Modal.Disclosure use={Button} {...modal}>
-        Novo Cargo
+        <Icon name='badge' spacing={1} /> Novo Cargo
       </Modal.Disclosure>
       <Dialog.Modal
         showActionButtons

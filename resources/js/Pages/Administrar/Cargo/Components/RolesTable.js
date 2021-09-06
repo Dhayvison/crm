@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, Modal, Table, Text } from 'bumbag';
 import DeleteModelDialog from '@/Components/DeleteModelDialog';
+import Icon from '@/Components/Icon';
 import UpdateRoleModalForm from './UpdateRoleModalForm';
 
 export default function RolesTable({ roles }) {
@@ -54,7 +55,7 @@ export default function RolesTable({ roles }) {
                     updateModal.show();
                   }}
                 >
-                  🖊
+                  <Icon name='edit' />
                 </Button>
                 <Button
                   variant='ghost'
@@ -66,7 +67,7 @@ export default function RolesTable({ roles }) {
                     deleteModal.show();
                   }}
                 >
-                  🗑
+                  <Icon name='delete' />
                 </Button>
               </Table.Cell>
             </Table.Row>

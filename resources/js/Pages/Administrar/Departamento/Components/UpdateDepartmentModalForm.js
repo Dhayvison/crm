@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Dialog, Modal, Button, Stack } from 'bumbag';
+import { Dialog, Stack } from 'bumbag';
 import { useForm } from '@inertiajs/inertia-react';
-import ValidationErrors from '@/Components/ValidationErrors';
+
 import Input from '@/Components/StyledInput';
 
-export default function UpdateDepartmentModalForm({ department }) {
-  const modal = Modal.useState();
+export default function UpdateDepartmentModalForm({ department, modalProps }) {
   const { data, setData, processing, errors, put } = useForm({
-    name: department.name,
-    description: department.description,
+    id: 0,
+    name: '',
+    description: '',
   });
 
   const onHandleChange = (event) => {
@@ -20,57 +20,54 @@ export default function UpdateDepartmentModalForm({ department }) {
 
   const submit = (e) => {
     e.preventDefault();
-    put(route('departments.update', { id: department.id }), {
+    put(route('departments.update', { id: data.id }), {
       onSuccess: () => {
-        modal.hide();
+        modalProps.hide();
       },
     });
   };
 
-  return (
-    <>
-      <Modal.Disclosure
-        use={React.forwardRef((props, ref) => (
-          <Button innerRef={ref} variant='ghost' borderRadius='7' {...props} />
-        ))}
-        {...modal}
-      >
-        🖊
-      </Modal.Disclosure>
-      <Dialog.Modal
-        showActionButtons
-        actionButtonsProps={{
-          submitProps: { isLoading: processing },
-          submitText: 'Salvar',
-          cancelText: 'Cancelar',
-          onClickSubmit: submit,
-        }}
-        title='Editar Departamento'
-        use='form'
-        {...modal}
-      >
-        <ValidationErrors errors={errors} />
-        <Stack spacing='major-4'>
-          <Input
-            type='text'
-            name='name'
-            label='Nome'
-            value={data.name}
-            isFocused
-            handleChange={onHandleChange}
-            required
-          />
+  React.useEffect(() => {
+    if (department) {
+      setData({ id: department.id, name: department.name, description: department.description });
+    }
+  }, [department]);
 
-          <Input
-            type='textarea'
-            name='description'
-            label='Descrição'
-            value={data.description}
-            handleChange={onHandleChange}
-            required
-          />
-        </Stack>
-      </Dialog.Modal>
-    </>
+  return (
+    <Dialog.Modal
+      showActionButtons
+      actionButtonsProps={{
+        submitProps: { isLoading: processing },
+        submitText: 'Salvar',
+        cancelText: 'Cancelar',
+        onClickSubmit: submit,
+      }}
+      title='Editar Departamento'
+      use='form'
+      {...modalProps}
+    >
+      <Stack spacing='major-4'>
+        <Input
+          type='text'
+          name='name'
+          label='Nome'
+          value={data.name}
+          error={errors.name}
+          isFocused
+          handleChange={onHandleChange}
+          required
+        />
+
+        <Input
+          type='textarea'
+          name='description'
+          label='Descrição'
+          value={data.description}
+          error={errors.description}
+          handleChange={onHandleChange}
+          required
+        />
+      </Stack>
+    </Dialog.Modal>
   );
 }
