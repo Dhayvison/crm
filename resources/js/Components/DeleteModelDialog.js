@@ -1,45 +1,47 @@
 import * as React from 'react';
 import { useForm } from '@inertiajs/inertia-react';
-import { Button, Dialog, Modal, Text } from 'bumbag';
+import { Dialog, Text } from 'bumbag';
 import ValidationErrors from '@/Components/ValidationErrors';
 
-export default function DeleteModelDialog({ deleteRoute, title, modelName }) {
-  const modal = Modal.useState();
-  const { processing, errors, delete: destroy } = useForm({});
+export default function DeleteModelDialog({ routeName, title, model, modalProps }) {
+  const {
+    setData,
+    processing,
+    errors,
+    delete: destroy,
+  } = useForm({
+    id: 0,
+  });
 
   const submit = () => {
-    destroy(deleteRoute, {
+    destroy(route(routeName, { id: model.id }), {
       onSuccess: () => {
-        modal.hide();
+        modalProps.hide();
       },
     });
   };
 
+  React.useEffect(() => {
+    if (model) {
+      setData({ id: model.id });
+    }
+  }, [model]);
+
   return (
-    <>
-      <Modal.Disclosure
-        use={React.forwardRef((props, ref) => (
-          <Button innerRef={ref} variant='ghost' palette='danger' borderRadius='7' {...props} />
-        ))}
-        {...modal}
-      >
-        🗑
-      </Modal.Disclosure>
-      <Dialog.Modal
-        showActionButtons
-        actionButtonsProps={{
-          submitProps: { isLoading: processing, palette: 'danger' },
-          submitText: 'Sim, deletar',
-          cancelText: 'Cancelar',
-          onClickSubmit: submit,
-        }}
-        type='danger'
-        title={title}
-        {...modal}
-      >
-        Tem certeza que deseja deletar <Text use='strong'>{modelName}</Text>?
-        <ValidationErrors errors={errors} />
-      </Dialog.Modal>
-    </>
+    <Dialog.Modal
+      showActionButtons
+      actionButtonsProps={{
+        submitProps: { isLoading: processing, palette: 'danger' },
+        submitText: 'Sim, deletar',
+        cancelText: 'Cancelar',
+        onClickSubmit: submit,
+      }}
+      type='danger'
+      title={title}
+      {...modalProps}
+    >
+      Tem certeza que deseja deletar <Text use='strong'>{model && model.name}</Text>?
+      <ValidationErrors errors={errors} />
+    </Dialog.Modal>
   );
 }

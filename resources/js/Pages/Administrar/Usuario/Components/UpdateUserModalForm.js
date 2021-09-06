@@ -46,31 +46,29 @@ export default function UpdateUserModal({ user, modalProps }) {
       {...modalProps}
     >
       {user && (
-        <>
-          <Stack spacing='major-4'>
-            <Input
-              type='text'
-              name='name'
-              label='Nome'
-              value={data.name}
-              error={errors.name && 'Nome não pode ser vazio'}
-              autoComplete='name'
-              handleChange={onHandleChange}
-              required
-            />
+        <Stack spacing='major-4'>
+          <Input
+            type='text'
+            name='name'
+            label='Nome'
+            value={data.name}
+            error={errors.name && 'Nome não pode ser vazio'}
+            autoComplete='name'
+            handleChange={onHandleChange}
+            required
+          />
 
-            <Input
-              type='email'
-              name='email'
-              label='E-mail'
-              value={data.email}
-              error={errors.email}
-              autoComplete='email'
-              handleChange={onHandleChange}
-              required
-            />
-          </Stack>
-        </>
+          <Input
+            type='email'
+            name='email'
+            label='E-mail'
+            value={data.email}
+            error={errors.email}
+            autoComplete='email'
+            handleChange={onHandleChange}
+            required
+          />
+        </Stack>
       )}
     </Dialog.Modal>
   );
