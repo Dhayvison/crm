@@ -4,6 +4,7 @@ import { Dialog, FieldStack, Modal } from 'bumbag';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import Select from '@/Components/StyledSelect';
+import Icon from '@/Components/Icon';
 
 export default function Create({ users, roles, departments, teams }) {
   const modal = Modal.useState();
@@ -56,7 +57,7 @@ export default function Create({ users, roles, departments, teams }) {
   return (
     <>
       <Modal.Disclosure use={Button} {...modal}>
-        Novo Colaborador
+        <Icon name='person' spacing={1} /> Novo Colaborador
       </Modal.Disclosure>
       <Dialog.Modal
         showActionButtons
