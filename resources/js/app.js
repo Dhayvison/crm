@@ -84,6 +84,15 @@ const theme = {
       },
     },
   },
+  Modal: {
+    Backdrop: {
+      styles: {
+        base: {
+          backdropFilter: 'blur(2px) grayscale(1)',
+        },
+      },
+    },
+  },
 };
 
 render(
