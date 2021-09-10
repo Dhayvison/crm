@@ -37,7 +37,7 @@ export default function Authenticated({ auth, header, children }) {
           <TopNav>
             <TopNav.Section>
               <TopNav.Item use={(props) => <InertiaLink href='/' {...props} />}>
-                <ApplicationLogo className='block h-9 w-auto' />
+                <ApplicationLogo className='block h-20' />
               </TopNav.Item>
               <TopNav.Item>
                 <DropdownMenu
