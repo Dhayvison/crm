@@ -27,6 +27,7 @@ Route::get('/', function () {
 Route::prefix('administrar')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/usuarios', [UsersController::class, 'index'])->name('administrar.usuarios');
     Route::get('/colaboradores', [EmployeesController::class, 'index'])->name('administrar.colaboradores');
+    Route::get('/colaboradores/editar/{id}', [EmployeesController::class, 'editar'])->name('colaboradores.editar');
     Route::get('/cargos', [RolesController::class, 'index'])->name('administrar.cargos');
     Route::get('/departamentos', [DepartmentsController::class, 'index'])->name('administrar.departamentos');
     Route::get('/times', [TeamsController::class, 'index'])->name('administrar.times');
