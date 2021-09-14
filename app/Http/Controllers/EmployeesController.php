@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmployeesCollection;
+use App\Http\Resources\EmployeesResource;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Role;
@@ -24,6 +25,19 @@ class EmployeesController extends Controller
   {
     return Inertia::render('Administrar/Colaboradores/Index', [
       'employees' => new EmployeesCollection(Employee::orderBy('full_name')->paginate()),
+      'formData' => [
+        'users' => User::orderBy('email')->get(),
+        'roles' => Role::orderBy('name')->get(),
+        'departments' => Department::orderBy('name')->get(),
+        'teams' => Team::orderBy('name')->get(),
+      ]
+    ]);
+  }
+
+  public function editar(Request $request, $id)
+  {
+    return Inertia::render('Administrar/Colaboradores/Editar', [
+      'employee' => new EmployeesResource(Employee::find($id)),
       'formData' => [
         'users' => User::orderBy('email')->get(),
         'roles' => Role::orderBy('name')->get(),
