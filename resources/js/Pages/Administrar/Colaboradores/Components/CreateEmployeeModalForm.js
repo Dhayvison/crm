@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from '@inertiajs/inertia-react';
-import { Dialog, FieldStack, Modal } from 'bumbag';
+import { Dialog, FieldStack, Modal, useToasts } from 'bumbag';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import Select from '@/Components/StyledSelect';
@@ -26,6 +26,7 @@ export default function Create({ users, roles, departments, teams }) {
     teamId: '',
     roleId: '',
   });
+  const toast = useToasts();
 
   const onHandleChange = (event) => {
     setData(
@@ -50,6 +51,7 @@ export default function Create({ users, roles, departments, teams }) {
           'roleId'
         );
         modal.hide();
+        toast.success({ title: 'Colaborador registrado com sucesso' });
       },
     });
   };

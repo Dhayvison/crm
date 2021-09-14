@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar, FieldStack, Flex, Text } from 'bumbag';
+import { Avatar, FieldStack, Flex, Text, useToasts } from 'bumbag';
 import { useDebouncedCallback } from 'use-debounce';
 import { useForm } from '@inertiajs/inertia-react';
 import moment from 'moment';
@@ -11,9 +11,16 @@ function CurrentUserForm({ user }) {
     name: user.name,
     email: user.email,
   });
+  const toast = useToasts();
 
   const submit = useDebouncedCallback(() => {
-    put(route('user.update', { id: user.id }));
+    put(route('user.update', { id: user.id }), {
+      onSuccess: () => {
+        toast.success({
+          title: 'Dados do usuário atualizados',
+        });
+      },
+    });
   }, 2000);
 
   const onHandleChange = (event) => {
