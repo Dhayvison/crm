@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { useForm } from '@inertiajs/inertia-react';
 
-import { Card, Stack } from 'bumbag';
+import { Card, Stack, useToasts } from 'bumbag';
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,6 +14,7 @@ export default function Register() {
     password: '',
     password_confirmation: '',
   });
+  const toast = useToasts();
 
   useEffect(() => {
     document.title = 'Registrar Usuário';
@@ -32,7 +33,11 @@ export default function Register() {
   const submit = (e) => {
     e.preventDefault();
 
-    post(route('register'));
+    post(route('register'), {
+      onSuccess: () => {
+        toast.success({ title: 'Usuário registrado com sucesso' });
+      },
+    });
   };
 
   return (
