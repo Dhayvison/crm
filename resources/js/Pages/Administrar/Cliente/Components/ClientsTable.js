@@ -2,10 +2,9 @@ import * as React from 'react';
 import { Button, Modal, Table, Text } from 'bumbag';
 import DeleteModelDialog from '@/Components/DeleteModelDialog';
 import Icon from '@/Components/Icon';
-import { InertiaLink } from '@inertiajs/inertia-react';
 
-export default function EmployeesTable({ employees }) {
-  const [selectedEmployee, setSelectedEmployee] = React.useState();
+export default function ClientsTable({ clients }) {
+  const [selectedClient, setSelectedClient] = React.useState();
 
   const deleteModal = Modal.useState();
   const deleteModalDisclosureProps = Modal.Disclosure.useProps({ ...deleteModal });
@@ -13,9 +12,9 @@ export default function EmployeesTable({ employees }) {
   return (
     <>
       <DeleteModelDialog
-        routeName='employees.delete'
-        title='Deletar colaborador'
-        model={selectedEmployee && { id: selectedEmployee.id, name: selectedEmployee.fullName }}
+        routeName='clients.delete'
+        title='Deletar cliente'
+        model={selectedClient}
         modalProps={deleteModal}
       />
       <Table isResponsive isStriped marginY='major-2'>
@@ -23,35 +22,30 @@ export default function EmployeesTable({ employees }) {
           <Table.Row>
             <Table.HeadCell>#</Table.HeadCell>
             <Table.HeadCell>Nome</Table.HeadCell>
-            <Table.HeadCell>Cargo</Table.HeadCell>
-            <Table.HeadCell>Time</Table.HeadCell>
-            <Table.HeadCell>Departamento</Table.HeadCell>
+            <Table.HeadCell>E-mail</Table.HeadCell>
+            <Table.HeadCell>Telefone</Table.HeadCell>
+            <Table.HeadCell>Celular</Table.HeadCell>
             <Table.HeadCell textAlign='center'>Ações</Table.HeadCell>
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {employees.map((employee) => (
-            <Table.Row key={employee.id}>
-              <Table.Cell>{employee.id}</Table.Cell>
+          {clients.map((client) => (
+            <Table.Row key={client.id}>
+              <Table.Cell>{client.id}</Table.Cell>
               <Table.Cell>
-                <Text use='strong'>{employee.fullName}</Text>
+                <Text use='strong'>{client.name}</Text>
               </Table.Cell>
-              <Table.Cell>{employee.role.name}</Table.Cell>
-              <Table.Cell>{employee.team.name}</Table.Cell>
-              <Table.Cell>{employee.department.name}</Table.Cell>
+              <Table.Cell>{client.email}</Table.Cell>
+              <Table.Cell>{client.phone}</Table.Cell>
+              <Table.Cell>{client.cellphone}</Table.Cell>
               <Table.Cell textAlign='center'>
-                <InertiaLink href={route('colaboradores.editar', employee.id)}>
-                  <Button variant='ghost' borderRadius='7'>
-                    <Icon name='edit' />
-                  </Button>
-                </InertiaLink>
                 <Button
                   variant='ghost'
                   palette='danger'
                   borderRadius='7'
                   {...deleteModalDisclosureProps}
                   onClick={() => {
-                    setSelectedEmployee(employee);
+                    setSelectedClient(client);
                     deleteModal.show();
                   }}
                 >

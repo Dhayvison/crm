@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\ClientsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::prefix('administrar')->middleware(['auth', 'verified'])->group(function (
     Route::get('/cargos', [RolesController::class, 'index'])->name('administrar.cargos');
     Route::get('/departamentos', [DepartmentsController::class, 'index'])->name('administrar.departamentos');
     Route::get('/times', [TeamsController::class, 'index'])->name('administrar.times');
+    Route::get('/clientes', [ClientsController::class, 'index'])->name('administrar.clientes');
 });
 
 Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user.delete');
