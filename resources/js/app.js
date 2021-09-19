@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { App } from '@inertiajs/inertia-react';
 import { InertiaProgress } from '@inertiajs/progress';
-import { Provider as BumbagProvider } from 'bumbag';
+import { Provider as BumbagProvider, ToastManager } from 'bumbag';
 import moment from 'moment';
 
 require('./bootstrap');
@@ -93,6 +93,14 @@ const theme = {
       },
     },
   },
+  Toast: {
+    defaultProps: {
+      accent: 'bottom',
+      variant: 'bordered',
+      className: 'shadow-lg',
+    },
+    timeout: 10000,
+  },
 };
 
 render(
@@ -101,6 +109,7 @@ render(
       initialPage={JSON.parse(el.dataset.page)}
       resolveComponent={(name) => require(`./Pages/${name}`).default}
     />
+    <ToastManager placeItems='bottom' />
   </BumbagProvider>,
   el
 );

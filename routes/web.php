@@ -54,4 +54,8 @@ Route::post('/employees/register', [EmployeesController::class, 'store'])->name(
 Route::put('/employees/{id}', [EmployeesController::class, 'update'])->name('employees.update');
 Route::delete('/employees/{id}', [EmployeesController::class, 'delete'])->name('employees.delete');
 
+Route::post('/clients/register', [ClientsController::class, 'store'])->name('clients.create');
+Route::put('/clients/{id}', [ClientsController::class, 'update'])->name('clients.update');
+Route::delete('/clients/{id}', [ClientsController::class, 'delete'])->name('clients.delete');
+
 require __DIR__ . '/auth.php';
