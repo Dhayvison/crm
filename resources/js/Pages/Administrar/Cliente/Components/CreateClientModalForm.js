@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from '@inertiajs/inertia-react';
+import { useDebouncedCallback } from 'use-debounce';
 import { Dialog, Divider, FieldStack, Modal, Switch, useToasts } from 'bumbag';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
@@ -21,10 +22,15 @@ export default function CreateClientModalForm() {
     email: '',
     phone: '',
     cellphone: '',
-    cep: '',
     isCPF: true,
     cpf: '',
     cnpj: '',
+    cep: '',
+    street: '',
+    number: '',
+    neighborhood: '',
+    city: '',
+    state: '',
   });
   const toast = useToasts();
 
@@ -46,6 +52,20 @@ export default function CreateClientModalForm() {
       },
     });
   };
+
+  const searchCEP = useDebouncedCallback((cep) => {
+    fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
+      .then((response) => response.json())
+      .then((responseData) => {
+        setData({
+          street: responseData.street,
+          neighborhood: responseData.neighborhood,
+          city: responseData.city,
+          state: responseData.state,
+        });
+      })
+      .catch((error) => console.error(error));
+  }, 1000);
 
   function cpfMask(cpf) {
     if (cpf.length > 14) {
@@ -74,7 +94,7 @@ export default function CreateClientModalForm() {
 
   function phoneMask(phone) {
     if (phone.length > 15) {
-      return phone.slice(0, -1);
+      return phone.slice(0, 15);
     }
 
     return phone
@@ -82,6 +102,14 @@ export default function CreateClientModalForm() {
       .replace(/^(\d)/, '($1')
       .replace(/(\d{2})(\d)/, '$1) $2')
       .replace(/(\d{5})(\d)/, '$1-$2');
+  }
+
+  function cepMask(cep) {
+    if (cep.length > 9) {
+      return cep.slice(0, 9);
+    }
+
+    return cep.replace(/\D/g, '').replace(/(\d{5})(\d)/, '$1-$2');
   }
 
   return (
@@ -198,6 +226,73 @@ export default function CreateClientModalForm() {
               required
             />
           )}
+
+          <Divider />
+
+          <Input
+            type='text'
+            name='cep'
+            label='CEP'
+            value={data.cep}
+            error={formErrors.cep && 'Insira um CEP válido'}
+            handleChange={(e) => {
+              e.target.value = cepMask(e.target.value);
+              searchCEP(e.target.value);
+              onHandleChange(e);
+            }}
+            required
+          />
+
+          <FieldStack orientation='horizontal'>
+            <Input
+              type='text'
+              name='street'
+              label='Rua'
+              value={data.street}
+              error={formErrors.street}
+              handleChange={onHandleChange}
+              required
+            />
+            <Input
+              type='number'
+              name='number'
+              label='Número'
+              value={data.number}
+              error={formErrors.number}
+              handleChange={onHandleChange}
+              required
+            />
+            <Input
+              type='text'
+              name='neighborhood'
+              label='Bairro'
+              value={data.neighborhood}
+              error={formErrors.neighborhood}
+              handleChange={onHandleChange}
+              required
+            />
+          </FieldStack>
+
+          <FieldStack orientation='horizontal'>
+            <Input
+              type='text'
+              name='city'
+              label='Cidade'
+              value={data.city}
+              error={formErrors.city}
+              handleChange={onHandleChange}
+              required
+            />
+            <Input
+              type='text'
+              name='state'
+              label='Estado'
+              value={data.state}
+              error={formErrors.state}
+              handleChange={onHandleChange}
+              required
+            />
+          </FieldStack>
         </FieldStack>
       </Dialog.Modal>
     </>
