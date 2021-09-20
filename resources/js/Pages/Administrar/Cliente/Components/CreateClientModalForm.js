@@ -72,6 +72,18 @@ export default function CreateClientModalForm() {
       .replace(/(\d{4})(\d{1,2})$/, '$1-$2');
   }
 
+  function phoneMask(phone) {
+    if (phone.length > 15) {
+      return phone.slice(0, -1);
+    }
+
+    return phone
+      .replace(/\D/g, '')
+      .replace(/^(\d)/, '($1')
+      .replace(/(\d{2})(\d)/, '$1) $2')
+      .replace(/(\d{5})(\d)/, '$1-$2');
+  }
+
   return (
     <>
       <Modal.Disclosure use={Button} {...modal}>
@@ -129,7 +141,10 @@ export default function CreateClientModalForm() {
               label='Telefone'
               value={data.phone}
               error={formErrors.phone && 'Insira um telefone válido'}
-              handleChange={onHandleChange}
+              handleChange={(e) => {
+                e.target.value = phoneMask(e.target.value);
+                onHandleChange(e);
+              }}
               required
             />
 
@@ -139,7 +154,10 @@ export default function CreateClientModalForm() {
               label='Telefone celular'
               value={data.cellphone}
               error={formErrors.cellphone && 'Insira um celular válido'}
-              handleChange={onHandleChange}
+              handleChange={(e) => {
+                e.target.value = phoneMask(e.target.value);
+                onHandleChange(e);
+              }}
               required
             />
           </FieldStack>
