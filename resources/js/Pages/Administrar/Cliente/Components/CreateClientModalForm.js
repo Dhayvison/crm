@@ -5,6 +5,7 @@ import { Dialog, Divider, FieldStack, Modal, Switch, useToasts } from 'bumbag';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import Icon from '@/Components/Icon';
+import moment from 'moment';
 
 export default function CreateClientModalForm() {
   const modal = Modal.useState();
@@ -18,7 +19,7 @@ export default function CreateClientModalForm() {
     clearErrors,
   } = useForm({
     name: '',
-    birthDate: '',
+    birthDate: moment().subtract(18, 'years').format('YYYY-MM-DD'),
     email: '',
     phone: '',
     cellphone: '',
