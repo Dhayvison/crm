@@ -54,17 +54,33 @@ export default function CreateClientModalForm() {
   };
 
   const searchCEP = useDebouncedCallback((cep) => {
-    fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
-      .then((response) => response.json())
-      .then((responseData) => {
-        setData({
-          street: responseData.street,
-          neighborhood: responseData.neighborhood,
-          city: responseData.city,
-          state: responseData.state,
+    if (cep) {
+      fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
+        .then((response) => response.json())
+        .then((responseData) => {
+          if (responseData.errors) {
+            toast.danger({ title: 'CEP não encontrado', message: responseData.message });
+          } else {
+            setData({
+              ...data,
+              street: responseData.street,
+              neighborhood: responseData.neighborhood,
+              city: responseData.city,
+              state: responseData.state,
+            });
+          }
+        })
+        .catch(() => {
+          toast.danger({ title: 'Ops! 🙁', message: 'Ocorreu um erro' });
+          setData({
+            ...data,
+            street: '',
+            neighborhood: '',
+            city: '',
+            state: '',
+          });
         });
-      })
-      .catch((error) => console.error(error));
+    }
   }, 1000);
 
   function cpfMask(cpf) {
@@ -126,7 +142,7 @@ export default function CreateClientModalForm() {
           onClickSubmit: submit,
         }}
         title='Cadastrar Cliente'
-        use='form'
+        wrap={(children) => <form>{children}</form>}
         {...modal}
       >
         <FieldStack>
