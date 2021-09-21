@@ -42,7 +42,7 @@ export default function UpdateUserModal({ user, modalProps }) {
         onClickSubmit: submit,
       }}
       title='Editar usuário'
-      use='form'
+      wrap={(children) => <form>{children}</form>}
       {...modalProps}
     >
       {user && (

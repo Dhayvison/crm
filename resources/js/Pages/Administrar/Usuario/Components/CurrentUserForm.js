@@ -40,7 +40,7 @@ function CurrentUserForm({ user }) {
         alt={user.name}
       />
 
-      <FieldStack marginLeft='major-4' use='form'>
+      <FieldStack marginLeft='major-4' wrap={(children) => <form>{children}</form>}>
         <Input
           type='text'
           name='name'

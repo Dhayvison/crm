@@ -42,7 +42,7 @@ export default function UpdateRoleModalForm({ role, modalProps }) {
         onClickSubmit: submit,
       }}
       title='Editar Cargo'
-      use='form'
+      wrap={(children) => <form>{children}</form>}
       {...modalProps}
     >
       {role && (

@@ -43,7 +43,7 @@ export default function UpdateDepartmentModalForm({ department, modalProps }) {
         onClickSubmit: submit,
       }}
       title='Editar Departamento'
-      use='form'
+      wrap={(children) => <form>{children}</form>}
       {...modalProps}
     >
       <Stack spacing='major-4'>

@@ -69,7 +69,7 @@ export default function UpdateEmployeeModalForm({
         onClickSubmit: submit,
       }}
       title='Editar Colaborador'
-      use='form'
+      wrap={(children) => <form>{children}</form>}
       {...modalProps}
     >
       <FieldStack>

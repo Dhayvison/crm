@@ -52,7 +52,7 @@ export default function Create() {
           onClickSubmit: submit,
         }}
         title='Registrar Departamento'
-        use='form'
+        wrap={(children) => <form>{children}</form>}
         {...modal}
       >
         <ValidationErrors errors={formErrors} />

@@ -51,7 +51,7 @@ export default function Create() {
           onClickSubmit: submit,
         }}
         title='Registrar Time'
-        use='form'
+        wrap={(children) => <form>{children}</form>}
         {...modal}
       >
         <ValidationErrors errors={formErrors} />

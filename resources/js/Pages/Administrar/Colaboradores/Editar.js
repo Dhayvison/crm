@@ -47,7 +47,7 @@ export default function Index(props) {
 
   return (
     <Authenticated auth={auth} errors={errors} header={`Editar: ${employee.data.fullName}`}>
-      <FieldStack marginTop='major-4' use='form'>
+      <FieldStack marginTop='major-4' wrap={(children) => <form>{children}</form>}>
         <Input
           type='text'
           name='fullName'

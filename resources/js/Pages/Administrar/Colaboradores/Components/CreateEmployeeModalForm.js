@@ -70,7 +70,7 @@ export default function Create({ users, roles, departments, teams }) {
           onClickSubmit: submit,
         }}
         title='Registrar Colaborador'
-        use='form'
+        wrap={(children) => <form>{children}</form>}
         {...modal}
       >
         <FieldStack>

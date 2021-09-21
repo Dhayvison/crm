@@ -43,7 +43,7 @@ export default function UpdateTeamModalForm({ team, modalProps }) {
         onClickSubmit: submit,
       }}
       title='Editar Time'
-      use='form'
+      wrap={(children) => <form>{children}</form>}
       {...modalProps}
     >
       <Stack spacing='major-4'>
