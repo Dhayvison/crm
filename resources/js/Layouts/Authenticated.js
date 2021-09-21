@@ -46,7 +46,7 @@ export default function Authenticated({ auth, header, children }) {
               <TopNav.Item>
                 <DropdownMenu
                   menu={ADMINISTRAR_MENU_ITEMS.map((menuItem) => (
-                    <DropdownMenu.Item padding='0'>
+                    <DropdownMenu.Item padding='0' key={menuItem.routeName}>
                       <InertiaLink
                         href={route(menuItem.routeName)}
                         method='get'
