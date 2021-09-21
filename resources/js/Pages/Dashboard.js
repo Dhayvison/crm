@@ -5,10 +5,6 @@ import { Alert } from 'bumbag';
 export default function Dashboard(props) {
   const { auth, errors } = props;
 
-  React.useEffect(() => {
-    document.title = 'Dashboard';
-  }, []);
-
   return (
     <Authenticated auth={auth} errors={errors} header='Dashboard'>
       <Alert title='Tudo certo!' type='success'>

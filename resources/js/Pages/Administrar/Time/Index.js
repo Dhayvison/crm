@@ -11,10 +11,6 @@ export default function Index(props) {
   const { teams } = props;
   const { data, meta } = teams;
 
-  React.useEffect(() => {
-    document.title = 'Times';
-  }, []);
-
   return (
     <Authenticated auth={auth} errors={errors} header='Times'>
       <Flex alignX='right' justifyContent='space-between'>

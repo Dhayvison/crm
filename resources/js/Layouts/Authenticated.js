@@ -34,6 +34,10 @@ const ADMINISTRAR_MENU_ITEMS = [
 export default function Authenticated({ auth, header, children }) {
   const { colorMode, setColorMode } = useColorMode();
 
+  React.useEffect(() => {
+    document.title = header;
+  }, [header]);
+
   return (
     <Box width='100vw' height='100vh' overflow='overlay' backgroundColor='default'>
       <Box altitude='100'>

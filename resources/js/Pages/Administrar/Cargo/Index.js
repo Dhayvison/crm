@@ -11,10 +11,6 @@ export default function Index(props) {
   const { roles } = props;
   const { data, meta } = roles;
 
-  React.useEffect(() => {
-    document.title = 'Cargos';
-  }, []);
-
   return (
     <Authenticated auth={auth} errors={errors} header='Cargos'>
       <Flex alignX='right' justifyContent='space-between'>

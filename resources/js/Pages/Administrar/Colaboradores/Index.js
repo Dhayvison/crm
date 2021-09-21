@@ -12,10 +12,6 @@ export default function Index(props) {
 
   const { data, meta } = employees;
 
-  React.useEffect(() => {
-    document.title = 'Colaboradores';
-  }, []);
-
   return (
     <Authenticated auth={auth} errors={errors} header='Colaboradores'>
       <Flex alignX='right' justifyContent='space-between'>

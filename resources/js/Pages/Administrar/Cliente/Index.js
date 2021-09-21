@@ -11,10 +11,6 @@ export default function Index(props) {
 
   const { data, meta } = clients;
 
-  React.useEffect(() => {
-    document.title = 'Colaboradores';
-  }, []);
-
   return (
     <Authenticated auth={auth} errors={errors} header='Clientes'>
       <Flex alignX='right' justifyContent='space-between'>

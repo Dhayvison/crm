@@ -12,10 +12,6 @@ export default function Index(props) {
   const { users } = props;
   const { data, meta } = users;
 
-  React.useEffect(() => {
-    document.title = 'Usuários';
-  }, []);
-
   return (
     <Authenticated auth={auth} errors={errors} header='Usuários'>
       <CurrentUserForm user={auth.user} />

@@ -11,10 +11,6 @@ export default function Index(props) {
   const { departments } = props;
   const { data, meta } = departments;
 
-  React.useEffect(() => {
-    document.title = 'Departamentos';
-  }, []);
-
   return (
     <Authenticated auth={auth} errors={errors} header='Departamentos'>
       <Flex alignX='right' justifyContent='space-between'>
