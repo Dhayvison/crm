@@ -131,7 +131,12 @@ export default function CreateClientModalForm() {
 
   return (
     <>
-      <Modal.Disclosure use={Button} {...modal}>
+      <Modal.Disclosure
+        use={React.forwardRef((props, ref) => (
+          <Button innerRef={ref} {...props} />
+        ))}
+        {...modal}
+      >
         <Icon name='person' spacing={1} /> Novo Cliente
       </Modal.Disclosure>
       <Dialog.Modal
