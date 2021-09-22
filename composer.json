@@ -17,7 +17,8 @@
         "laravel/framework": "^8.40",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+        "ext-pdo_sqlite": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -44,9 +45,8 @@
         "compile": [
             "yarn install",
             "yarn prod",
-            "touch database/database.sqlite",
-            "php artisan migrate",
-            "php artisan db:seed"
+            "@php artisan migrate",
+            "@php artisan db:seed"
         ],
         "reseed": [
             "@php artisan migrate:fresh",
