@@ -45,6 +45,7 @@
         "compile": [
             "yarn install",
             "yarn prod",
+            "composer install --dev",
             "@php artisan migrate",
             "@php artisan db:seed"
         ],
