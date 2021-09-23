@@ -21,8 +21,8 @@ class CreateClientsTable extends Migration
       $table->string('phone');
       $table->string('cellphone');
       $table->string('address');
-      $table->string('cpf');
-      $table->string('cnpj');
+      $table->string('cpf')->nullable();
+      $table->string('cnpj')->nullable();
       $table->softDeletes();
       $table->timestamps();
     });
