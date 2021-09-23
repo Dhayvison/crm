@@ -23,12 +23,31 @@ class ClientsController extends Controller
       'name' => 'required|string|max:255',
       'birthDate' => 'required|date',
       'email' => 'required|email',
-      'phone' => 'required|regex:/^[0-9]{11}$/',
-      'cellphone' => 'required|regex:/^[0-9]{11}$/',
-      'address' => 'required|string',
-      'cpf' => 'required|string',
-      'cnpj' => 'required|string',
+      'phone' => 'required|telefone',
+      'cellphone' => 'required|celular_com_ddd',
     ]);
+
+    if ($request->isCPF) {
+      $request->validate([
+        'cpf' => 'required|cpf',
+      ]);
+    } else {
+      $request->validate([
+        'cnpj' => 'required|cnpj',
+      ]);
+    }
+
+    $request->validate([
+      'cep' => 'required|formato_cep',
+      'city' => 'required|string',
+      'neighborhood' => 'required|string',
+      'number' => 'required|integer',
+      'state' => 'required|string',
+      'street' => 'required|string',
+    ]);
+
+    $address = "$request->street, nº $request->number, " .
+      "$request->neighborhood, $request->city - $request->state. CEP: $request->cep";
 
     Client::create([
       'name' => $request->name,
@@ -36,7 +55,7 @@ class ClientsController extends Controller
       'email' => $request->email,
       'phone' => $request->phone,
       'cellphone' => $request->cellphone,
-      'address' => $request->address,
+      'address' => $address,
       'cpf' => $request->cpf,
       'cnpj' => $request->cnpj,
     ]);
