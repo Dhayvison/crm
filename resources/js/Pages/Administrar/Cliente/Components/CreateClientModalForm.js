@@ -17,6 +17,7 @@ export default function CreateClientModalForm() {
     errors: formErrors,
     reset,
     clearErrors,
+    transform,
   } = useForm({
     name: '',
     birthDate: moment().subtract(18, 'years').format('YYYY-MM-DD'),
@@ -47,12 +48,18 @@ export default function CreateClientModalForm() {
     clearErrors();
     post(route('clients.create'), {
       onSuccess: () => {
-        reset('name', 'birthDate', 'email', 'phone', 'cellphone', 'address', 'cpf', 'cnpj');
+        reset();
         modal.hide();
         toast.success({ title: 'Cliente registrado com sucesso' });
       },
     });
   };
+
+  transform((dataForm) => ({
+    ...dataForm,
+    cpf: dataForm.isCPF ? dataForm.cpf : '',
+    cnpj: !dataForm.isCPF ? dataForm.cnpj : '',
+  }));
 
   const searchCEP = useDebouncedCallback((cep) => {
     if (cep) {
@@ -110,6 +117,14 @@ export default function CreateClientModalForm() {
   }
 
   function phoneMask(phone) {
+    if (phone.length > 9) {
+      return phone.slice(0, 9);
+    }
+
+    return phone.replace(/\D/g, '').replace(/(\d{4})(\d)/, '$1-$2');
+  }
+
+  function cellphoneMask(phone) {
     if (phone.length > 15) {
       return phone.slice(0, 15);
     }
@@ -205,7 +220,7 @@ export default function CreateClientModalForm() {
               value={data.cellphone}
               error={formErrors.cellphone && 'Insira um celular válido'}
               handleChange={(e) => {
-                e.target.value = phoneMask(e.target.value);
+                e.target.value = cellphoneMask(e.target.value);
                 onHandleChange(e);
               }}
               required
@@ -269,9 +284,9 @@ export default function CreateClientModalForm() {
             <Input
               type='text'
               name='street'
-              label='Rua'
+              label='Logradouro'
               value={data.street}
-              error={formErrors.street}
+              error={formErrors.street && 'Insira o logradouro'}
               handleChange={onHandleChange}
               required
             />
@@ -280,7 +295,7 @@ export default function CreateClientModalForm() {
               name='number'
               label='Número'
               value={data.number}
-              error={formErrors.number}
+              error={formErrors.number && 'Insira o número'}
               handleChange={onHandleChange}
               required
             />
@@ -289,7 +304,7 @@ export default function CreateClientModalForm() {
               name='neighborhood'
               label='Bairro'
               value={data.neighborhood}
-              error={formErrors.neighborhood}
+              error={formErrors.neighborhood && 'Insira o bairro'}
               handleChange={onHandleChange}
               required
             />
@@ -301,7 +316,7 @@ export default function CreateClientModalForm() {
               name='city'
               label='Cidade'
               value={data.city}
-              error={formErrors.city}
+              error={formErrors.city && 'Insira a cidade'}
               handleChange={onHandleChange}
               required
             />
@@ -310,7 +325,7 @@ export default function CreateClientModalForm() {
               name='state'
               label='Estado'
               value={data.state}
-              error={formErrors.state}
+              error={formErrors.state && 'Insira o estado'}
               handleChange={onHandleChange}
               required
             />
