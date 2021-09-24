@@ -44,7 +44,6 @@
     },
     "scripts": {
         "compile": [
-            "yarn install",
             "yarn prod",
             "composer install --dev",
             "@php artisan migrate",
