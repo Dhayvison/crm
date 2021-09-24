@@ -10,9 +10,10 @@ password: 12345678
 
 Stack:
 
-- [Laravel](https://laravel.com/)
+- [Laravel 8](https://laravel.com/) 
 - [InertiaJS](https://inertiajs.com/)
 - [ReactJS](https://reactjs.org/)
+- [Bumbag UI](https://bumbag.style/)
 - SQLite 
 
 O banco de dados é resetado a cada 30 min de inatividade, quando o container dorme.
