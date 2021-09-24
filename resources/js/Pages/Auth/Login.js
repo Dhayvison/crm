@@ -8,8 +8,8 @@ import { Card, Stack } from 'bumbag';
 
 export default function Login() {
   const { data, setData, post, processing, errors, reset } = useForm({
-    email: '',
-    password: '',
+    email: 'johndoe@example.com',
+    password: '12345678',
   });
 
   useEffect(() => {
