@@ -5,6 +5,7 @@ import { Dialog, Divider, FieldStack, Modal, Switch, useToasts } from 'bumbag';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import Icon from '@/Components/Icon';
+import { cellphoneMask, cepMask, cnpjMask, cpfMask, phoneMask } from '@/Utils/field-masks';
 import moment from 'moment';
 
 export default function CreateClientModalForm() {
@@ -91,59 +92,6 @@ export default function CreateClientModalForm() {
     }
   }, 1000);
 
-  function cpfMask(cpf) {
-    if (cpf.length > 14) {
-      return cpf.slice(0, -1);
-    }
-
-    return cpf
-      .replace(/\D/g, '')
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-  }
-
-  function cnpjMask(cnpj) {
-    if (cnpj.length > 18) {
-      return cnpj.slice(0, -1);
-    }
-
-    return cnpj
-      .replace(/\D/g, '')
-      .replace(/(\d{2})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d)/, '$1/$2')
-      .replace(/(\d{4})(\d{1,2})$/, '$1-$2');
-  }
-
-  function phoneMask(phone) {
-    if (phone.length > 9) {
-      return phone.slice(0, 9);
-    }
-
-    return phone.replace(/\D/g, '').replace(/(\d{4})(\d)/, '$1-$2');
-  }
-
-  function cellphoneMask(phone) {
-    if (phone.length > 15) {
-      return phone.slice(0, 15);
-    }
-
-    return phone
-      .replace(/\D/g, '')
-      .replace(/^(\d)/, '($1')
-      .replace(/(\d{2})(\d)/, '$1) $2')
-      .replace(/(\d{5})(\d)/, '$1-$2');
-  }
-
-  function cepMask(cep) {
-    if (cep.length > 9) {
-      return cep.slice(0, 9);
-    }
-
-    return cep.replace(/\D/g, '').replace(/(\d{5})(\d)/, '$1-$2');
-  }
-
   return (
     <>
       <Modal.Disclosure
@@ -206,10 +154,8 @@ export default function CreateClientModalForm() {
               label='Telefone'
               value={data.phone}
               error={formErrors.phone && 'Insira um telefone válido'}
-              handleChange={(e) => {
-                e.target.value = phoneMask(e.target.value);
-                onHandleChange(e);
-              }}
+              handleChange={onHandleChange}
+              mask={phoneMask}
               required
             />
 
@@ -219,10 +165,8 @@ export default function CreateClientModalForm() {
               label='Telefone celular'
               value={data.cellphone}
               error={formErrors.cellphone && 'Insira um celular válido'}
-              handleChange={(e) => {
-                e.target.value = cellphoneMask(e.target.value);
-                onHandleChange(e);
-              }}
+              handleChange={onHandleChange}
+              mask={cellphoneMask}
               required
             />
           </FieldStack>
@@ -243,10 +187,8 @@ export default function CreateClientModalForm() {
               label='CPF'
               value={data.cpf}
               error={formErrors.cpf && 'Insira um CPF válido'}
-              handleChange={(e) => {
-                e.target.value = cpfMask(e.target.value);
-                onHandleChange(e);
-              }}
+              handleChange={onHandleChange}
+              mask={cpfMask}
               required
             />
           ) : (
@@ -256,10 +198,8 @@ export default function CreateClientModalForm() {
               label='CNPJ'
               value={data.cnpj}
               error={formErrors.cnpj && 'Insira um CNPJ válido'}
-              handleChange={(e) => {
-                e.target.value = cnpjMask(e.target.value);
-                onHandleChange(e);
-              }}
+              handleChange={onHandleChange}
+              mask={cnpjMask}
               required
             />
           )}
@@ -273,10 +213,10 @@ export default function CreateClientModalForm() {
             value={data.cep}
             error={formErrors.cep && 'Insira um CEP válido'}
             handleChange={(e) => {
-              e.target.value = cepMask(e.target.value);
               searchCEP(e.target.value);
               onHandleChange(e);
             }}
+            mask={cepMask}
             required
           />
 
