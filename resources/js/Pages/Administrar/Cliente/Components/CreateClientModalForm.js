@@ -35,6 +35,7 @@ export default function CreateClientModalForm() {
     city: '',
     state: '',
   });
+  const [gettingCep, setGettingCep] = React.useState(false);
   const toast = useToasts();
 
   const onHandleChange = (event) => {
@@ -63,7 +64,8 @@ export default function CreateClientModalForm() {
   }));
 
   const searchCEP = useDebouncedCallback((cep) => {
-    if (cep) {
+    if (cep && cep.length > 8) {
+      setGettingCep(true);
       fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
         .then((response) => response.json())
         .then((responseData) => {
@@ -80,7 +82,7 @@ export default function CreateClientModalForm() {
           }
         })
         .catch(() => {
-          toast.danger({ title: 'Ops! 🙁', message: 'Ocorreu um erro' });
+          toast.danger({ title: 'Ops! 🙁', message: `Ocorreu um erro ao pesquisar o CEP ${cep}` });
           setData({
             ...data,
             street: '',
@@ -88,6 +90,9 @@ export default function CreateClientModalForm() {
             city: '',
             state: '',
           });
+        })
+        .finally(() => {
+          setGettingCep(false);
         });
     }
   }, 1000);
@@ -217,6 +222,9 @@ export default function CreateClientModalForm() {
               onHandleChange(e);
             }}
             mask={cepMask}
+            inputProps={{
+              isLoading: gettingCep,
+            }}
             required
           />
 
