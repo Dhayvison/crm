@@ -7,6 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ url('/images/logo.png') }}">
+    <meta name="theme-color" content="#574feb">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#574feb">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
