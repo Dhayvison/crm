@@ -6,8 +6,11 @@ import Input from '@/Components/StyledInput';
 import Select from '@/Components/StyledSelect';
 import Icon from '@/Components/Icon';
 
-export default function Create({ users, roles, departments, teams }) {
+export default function Create({ roles, departments, teams }) {
   const modal = Modal.useState();
+  const [users, setUsers] = React.useState([]);
+  const [isFetching, setIsFetching] = React.useState(true);
+
   const {
     data,
     setData,
@@ -55,6 +58,20 @@ export default function Create({ users, roles, departments, teams }) {
       },
     });
   };
+
+  React.useEffect(() => {
+    fetch(`${route('api.users')}`)
+      .then((response) => response.json())
+      .then((responseData) => {
+        setUsers(responseData.data);
+      })
+      .catch(() => {
+        toast.danger({ title: 'Ops! 🙁', message: `Ocorreu um erro.` });
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  }, []);
 
   return (
     <>
@@ -134,6 +151,7 @@ export default function Create({ users, roles, departments, teams }) {
             value={data.userId}
             error={formErrors.userId && 'Selecione o e-mail associado ao colaborador'}
             handleChange={onHandleChange}
+            inputProps={{ isLoading: isFetching }}
           />
 
           <Select

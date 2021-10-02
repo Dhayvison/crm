@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UsersCollection;
+use App\Http\Resources\UsersResource;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -42,5 +43,14 @@ class UsersController extends Controller
     $user = User::find($id);
     $user->delete();
     return redirect(route('administrar.usuarios'));
+  }
+
+  public function view($id = null)
+  {
+    if ($id) {
+      return new UsersResource(User::find($id));
+    } else {
+      return new UsersCollection(User::orderBy('email')->get());
+    }
   }
 }

@@ -9,7 +9,7 @@ const StyledSelect = applyTheme(Select, {
   },
 });
 
-export default function Styled({ name, value, error, handleChange, label, options }) {
+export default function Styled({ name, value, error, handleChange, label, options, inputProps }) {
   const input = React.useRef();
   return (
     <FieldWrapper validationText={error} state={error && 'danger'}>
@@ -21,6 +21,7 @@ export default function Styled({ name, value, error, handleChange, label, option
         width='100%'
         label={label}
         options={options}
+        {...inputProps}
       />
     </FieldWrapper>
   );

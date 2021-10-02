@@ -18,7 +18,6 @@ export default function Index(props) {
         <Pagination meta={meta} route={route('administrar.colaboradores')} />
 
         <CreateEmployeeModalForm
-          users={formData.users}
           roles={formData.roles}
           departments={formData.departments}
           teams={formData.teams}

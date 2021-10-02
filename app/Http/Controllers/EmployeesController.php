@@ -26,7 +26,6 @@ class EmployeesController extends Controller
     return Inertia::render('Administrar/Colaboradores/Index', [
       'employees' => new EmployeesCollection(Employee::orderBy('full_name')->paginate()),
       'formData' => [
-        'users' => User::orderBy('email')->get(),
         'roles' => Role::orderBy('name')->get(),
         'departments' => Department::orderBy('name')->get(),
         'teams' => Team::orderBy('name')->get(),

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/', function () {
+    return ['status' => 'working'];
+})->name('api');
+
+Route::get('/users/{id?}', [UsersController::class, 'view'])->name('api.users');
