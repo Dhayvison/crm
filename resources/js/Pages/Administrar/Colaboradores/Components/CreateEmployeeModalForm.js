@@ -5,11 +5,40 @@ import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import Select from '@/Components/StyledSelect';
 import Icon from '@/Components/Icon';
+import { useFetch } from 'react-async';
 
-export default function Create({ roles, departments, teams }) {
+export default function Create() {
   const modal = Modal.useState();
-  const [users, setUsers] = React.useState([]);
-  const [isFetching, setIsFetching] = React.useState(true);
+
+  const fetchGeneralOptions = {
+    defer: true,
+    json: true,
+    initialValue: { data: [] },
+  };
+
+  const {
+    data: users,
+    isPending: pendingUsers,
+    run: getUsers,
+  } = useFetch(route('api.users'), {}, fetchGeneralOptions);
+
+  const {
+    data: roles,
+    isPending: pendingRoles,
+    run: getRoles,
+  } = useFetch(route('api.roles'), {}, fetchGeneralOptions);
+
+  const {
+    data: departments,
+    isPending: pendingDepartments,
+    run: getDepartments,
+  } = useFetch(route('api.departments'), {}, fetchGeneralOptions);
+
+  const {
+    data: teams,
+    isPending: pendingTeams,
+    run: getTeams,
+  } = useFetch(route('api.teams'), {}, fetchGeneralOptions);
 
   const {
     data,
@@ -60,17 +89,10 @@ export default function Create({ roles, departments, teams }) {
   };
 
   React.useEffect(() => {
-    fetch(`${route('api.users')}`)
-      .then((response) => response.json())
-      .then((responseData) => {
-        setUsers(responseData.data);
-      })
-      .catch(() => {
-        toast.danger({ title: 'Ops! 🙁', message: `Ocorreu um erro.` });
-      })
-      .finally(() => {
-        setIsFetching(false);
-      });
+    getUsers();
+    getRoles();
+    getDepartments();
+    getTeams();
   }, []);
 
   return (
@@ -147,42 +169,45 @@ export default function Create({ roles, departments, teams }) {
           <Select
             name='userId'
             label='E-mail'
-            options={users.map((user) => ({ label: user.email, value: user.id }))}
+            options={users.data.map((user) => ({ label: user.email, value: user.id }))}
             value={data.userId}
             error={formErrors.userId && 'Selecione o e-mail associado ao colaborador'}
             handleChange={onHandleChange}
-            inputProps={{ isLoading: isFetching }}
+            inputProps={{ isLoading: pendingUsers }}
           />
 
           <Select
             name='roleId'
             label='Cargo'
-            options={roles.map((role) => ({ label: role.name, value: role.id }))}
+            options={roles.data.map((role) => ({ label: role.name, value: role.id }))}
             value={data.roleId}
             error={formErrors.roleId && 'Selecione o cargo'}
             handleChange={onHandleChange}
+            inputProps={{ isLoading: pendingRoles }}
           />
 
           <FieldStack orientation='horizontal'>
             <Select
               name='departmentId'
               label='Departamento'
-              options={departments.map((department) => ({
+              options={departments.data.map((department) => ({
                 label: department.name,
                 value: department.id,
               }))}
               value={data.departmentId}
               error={formErrors.departmentId && 'Selecione o departamento'}
               handleChange={onHandleChange}
+              inputProps={{ isLoading: pendingDepartments }}
             />
 
             <Select
               name='teamId'
               label='Time'
-              options={teams.map((team) => ({ label: team.name, value: team.id }))}
+              options={teams.data.map((team) => ({ label: team.name, value: team.id }))}
               value={data.teamId}
               error={formErrors.teamId && 'Selecione o time'}
               handleChange={onHandleChange}
+              inputProps={{ isLoading: pendingTeams }}
             />
           </FieldStack>
         </FieldStack>

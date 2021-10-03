@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RolesCollection;
+use App\Http\Resources\RolesResource;
 use App\Models\Role;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -62,5 +63,14 @@ class RolesController extends Controller
     $role = Role::find($id);
     $role->delete();
     return redirect(route('administrar.cargos'));
+  }
+
+  public function view($id = null)
+  {
+    if ($id) {
+      return new RolesResource(Role::find($id));
+    } else {
+      return new RolesCollection(Role::orderBy('name')->get());
+    }
   }
 }

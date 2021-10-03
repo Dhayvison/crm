@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DepartmentsCollection;
+use App\Http\Resources\DepartmentsResource;
 use App\Models\Department;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -66,5 +67,14 @@ class DepartmentsController extends Controller
     $department = Department::find($id);
     $department->delete();
     return redirect(route('administrar.departamentos'));
+  }
+
+  public function view($id = null)
+  {
+    if ($id) {
+      return new DepartmentsResource(Department::find($id));
+    } else {
+      return new DepartmentsCollection(Department::orderBy('name')->get());
+    }
   }
 }

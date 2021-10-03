@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TeamsCollection;
+use App\Http\Resources\TeamsResource;
 use App\Models\Team;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -65,5 +66,14 @@ class TeamsController extends Controller
     $team = Team::find($id);
     $team->delete();
     return redirect(route('administrar.times'));
+  }
+
+  public function view($id = null)
+  {
+    if ($id) {
+      return new TeamsResource(Team::find($id));
+    } else {
+      return new TeamsCollection(Team::orderBy('name')->get());
+    }
   }
 }
