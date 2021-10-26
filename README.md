@@ -18,3 +18,17 @@ Stack:
 
 O banco de dados é resetado a cada 30 min de inatividade, quando o container dorme.
 Então, sinta-se à vontade para criar e editar os dados existentes.
+
+### 🖥 Configuração local
+
+Clone o repositório
+```
+git clone https://github.com/Dhayvison/crm.git
+```
+
+#### Com Docker
+
+Execute o build up dos containers
+```
+./vendor/bin/sail up
+```
