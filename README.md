@@ -38,3 +38,5 @@ Execute o build up dos containers
 ```
 ./vendor/bin/sail up
 ```
+
+⏳ Continua ... 
