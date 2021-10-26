@@ -26,7 +26,7 @@ Clone o repositório
 git clone https://github.com/Dhayvison/crm.git
 ```
 
-#### Com Docker
+#### Com Docker 🐋
 
 Execute o build up dos containers
 ```
