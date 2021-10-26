@@ -47,6 +47,8 @@
             "yarn install",
             "yarn prod",
             "composer install --dev",
+            "touch database/database.sqlite && touch database/database.test.sqlite",
+            "@php artisan test",
             "@php artisan migrate",
             "@php artisan db:seed"
         ],
