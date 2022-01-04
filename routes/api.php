@@ -6,7 +6,7 @@ use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,10 @@ use Inertia\Inertia;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+if (env('APP_ENV') === 'production') {
+    URL::forceSchema('https');
+}
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

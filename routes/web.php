@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UsersController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\ClientsController;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +20,10 @@ use App\Http\Controllers\ClientsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+if (env('APP_ENV') === 'production') {
+    URL::forceSchema('https');
+}
 
 Route::get('/', function () {
     return Inertia::render('Dashboard');
