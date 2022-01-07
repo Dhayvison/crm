@@ -8,7 +8,6 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\ClientsController;
-use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +19,6 @@ use Illuminate\Support\Facades\URL;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-if (env('APP_ENV') === 'production') {
-    URL::forceSchema('https');
-}
 
 Route::get('/', function () {
     return Inertia::render('Dashboard');
