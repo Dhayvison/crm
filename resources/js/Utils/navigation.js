@@ -1,12 +1,10 @@
 /**
  * @param {string} routeName
+ * @param {array} params
  * @returns {string} endpoint named by param routeName
  */
 function endpoint(routeName, params) {
-  if (process.env.NODE_ENV === 'production') {
-    return route(routeName, params, false);
-  }
-  return route(routeName, params);
+  return route(routeName, params, false);
 }
 
 export { endpoint };
