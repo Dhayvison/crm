@@ -1,12 +1,13 @@
 import React from 'react';
-import { useForm } from '@inertiajs/inertia-react';
 import { useDebouncedCallback } from 'use-debounce';
+import moment from 'moment';
 import { Dialog, Divider, FieldStack, Modal, Switch, useToasts } from 'bumbag';
+import { useForm } from '@inertiajs/inertia-react';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import Icon from '@/Components/Icon';
 import { cellphoneMask, cepMask, cnpjMask, cpfMask, phoneMask } from '@/Utils/field-masks';
-import moment from 'moment';
+import { appRoute } from '@/Utils/navigation';
 
 export default function CreateClientModalForm() {
   const modal = Modal.useState();
@@ -48,7 +49,7 @@ export default function CreateClientModalForm() {
   const submit = (e) => {
     e.preventDefault();
     clearErrors();
-    post(route('clients.create'), {
+    post(appRoute('clients.create'), {
       onSuccess: () => {
         reset();
         modal.hide();

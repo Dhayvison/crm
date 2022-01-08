@@ -3,8 +3,8 @@
  * @param {array} params
  * @returns {string} endpoint named by param routeName
  */
-function endpoint(routeName, params) {
+function appRoute(routeName, params) {
   return route(routeName, params, false);
 }
 
-export { endpoint };
+export { appRoute };

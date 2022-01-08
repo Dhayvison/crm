@@ -5,6 +5,7 @@ import { useForm } from '@inertiajs/inertia-react';
 import moment from 'moment';
 
 import Input from '@/Components/StyledInput';
+import { appRoute } from '@/Utils/navigation';
 
 function CurrentUserForm({ user }) {
   const { data, setData, put, errors, processing } = useForm({
@@ -14,7 +15,7 @@ function CurrentUserForm({ user }) {
   const toast = useToasts();
 
   const submit = useDebouncedCallback(() => {
-    put(route('user.update', { id: user.id }), {
+    put(appRoute('user.update', { id: user.id }), {
       onSuccess: () => {
         toast.success({
           title: 'Dados do usuário atualizados',

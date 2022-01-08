@@ -1,11 +1,12 @@
 import React from 'react';
-import { useForm } from '@inertiajs/inertia-react';
+import { useFetch } from 'react-async';
 import { Dialog, FieldStack, Modal, useToasts } from 'bumbag';
+import { useForm } from '@inertiajs/inertia-react';
 import Button from '@/Components/StyledButton';
 import Input from '@/Components/StyledInput';
 import Select from '@/Components/StyledSelect';
 import Icon from '@/Components/Icon';
-import { useFetch } from 'react-async';
+import { appRoute } from '@/Utils/navigation';
 
 export default function Create() {
   const modal = Modal.useState();
@@ -20,25 +21,25 @@ export default function Create() {
     data: users,
     isPending: pendingUsers,
     run: getUsers,
-  } = useFetch(route('api.users'), {}, fetchGeneralOptions);
+  } = useFetch(appRoute('api.users'), {}, fetchGeneralOptions);
 
   const {
     data: roles,
     isPending: pendingRoles,
     run: getRoles,
-  } = useFetch(route('api.roles'), {}, fetchGeneralOptions);
+  } = useFetch(appRoute('api.roles'), {}, fetchGeneralOptions);
 
   const {
     data: departments,
     isPending: pendingDepartments,
     run: getDepartments,
-  } = useFetch(route('api.departments'), {}, fetchGeneralOptions);
+  } = useFetch(appRoute('api.departments'), {}, fetchGeneralOptions);
 
   const {
     data: teams,
     isPending: pendingTeams,
     run: getTeams,
-  } = useFetch(route('api.teams'), {}, fetchGeneralOptions);
+  } = useFetch(appRoute('api.teams'), {}, fetchGeneralOptions);
 
   const {
     data,
@@ -69,7 +70,7 @@ export default function Create() {
 
   const submit = (e) => {
     e.preventDefault();
-    post(route('employees.create'), {
+    post(appRoute('employees.create'), {
       onSuccess: () => {
         reset(
           'fullName',

@@ -6,6 +6,7 @@ import ValidationErrors from '@/Components/ValidationErrors';
 import { useForm } from '@inertiajs/inertia-react';
 
 import { Card, Stack, useToasts } from 'bumbag';
+import { appRoute } from '@/Utils/navigation';
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -33,7 +34,7 @@ export default function Register() {
   const submit = (e) => {
     e.preventDefault();
 
-    post(route('register'), {
+    post(appRoute('register'), {
       onSuccess: () => {
         toast.success({ title: 'Usuário registrado com sucesso' });
       },

@@ -4,6 +4,7 @@ import { useForm } from '@inertiajs/inertia-react';
 import ValidationErrors from '@/Components/ValidationErrors';
 import Input from '@/Components/StyledInput';
 import Select from '@/Components/StyledSelect';
+import { appRoute } from '@/Utils/navigation';
 
 export default function UpdateEmployeeModalForm({
   employee,
@@ -35,7 +36,7 @@ export default function UpdateEmployeeModalForm({
 
   const submit = (e) => {
     e.preventDefault();
-    put(route('employees.update', { id: data.id }), {
+    put(appRoute('employees.update', { id: data.id }), {
       onSuccess: () => {
         modalProps.hide();
       },

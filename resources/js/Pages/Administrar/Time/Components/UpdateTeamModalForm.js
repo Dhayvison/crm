@@ -3,6 +3,7 @@ import { Dialog, Stack } from 'bumbag';
 import { useForm } from '@inertiajs/inertia-react';
 
 import Input from '@/Components/StyledInput';
+import { appRoute } from '@/Utils/navigation';
 
 export default function UpdateTeamModalForm({ team, modalProps }) {
   const { data, setData, processing, errors, put } = useForm({
@@ -20,7 +21,7 @@ export default function UpdateTeamModalForm({ team, modalProps }) {
 
   const submit = (e) => {
     e.preventDefault();
-    put(route('teams.update', { id: data.id }), {
+    put(appRoute('teams.update', { id: data.id }), {
       onSuccess: () => {
         modalProps.hide();
       },

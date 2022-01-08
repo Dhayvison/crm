@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useForm } from '@inertiajs/inertia-react';
 import { Dialog, Stack } from 'bumbag';
 import Input from '@/Components/StyledInput';
+import { appRoute } from '@/Utils/navigation';
 
 export default function UpdateUserModal({ user, modalProps }) {
   const { data, setData, processing, errors, put } = useForm({
@@ -19,7 +20,7 @@ export default function UpdateUserModal({ user, modalProps }) {
 
   const submit = (e) => {
     e.preventDefault();
-    put(route('user.update', { id: data.id }), {
+    put(appRoute('user.update', { id: data.id }), {
       onSuccess: () => {
         modalProps.hide();
       },

@@ -2,12 +2,13 @@ import * as React from 'react';
 import { Dialog, Text } from 'bumbag';
 import { useForm } from '@inertiajs/inertia-react';
 import ValidationErrors from '@/Components/ValidationErrors';
+import { appRoute } from '@/Utils/navigation';
 
 export default function DeleteUserDialog({ user, modalProps }) {
   const { processing, errors, delete: destroy } = useForm({});
 
   const submit = () => {
-    destroy(route('user.delete', { id: user.id }), {
+    destroy(appRoute('user.delete', { id: user.id }), {
       onSuccess: () => {
         modalProps.hide();
       },

@@ -3,6 +3,7 @@ import { Button, Modal, Table, Text } from 'bumbag';
 import DeleteModelDialog from '@/Components/DeleteModelDialog';
 import Icon from '@/Components/Icon';
 import { InertiaLink } from '@inertiajs/inertia-react';
+import { appRoute } from '@/Utils/navigation';
 
 export default function EmployeesTable({ employees }) {
   const [selectedEmployee, setSelectedEmployee] = React.useState();
@@ -40,7 +41,7 @@ export default function EmployeesTable({ employees }) {
               <Table.Cell>{employee.team.name}</Table.Cell>
               <Table.Cell>{employee.department.name}</Table.Cell>
               <Table.Cell textAlign='center'>
-                <InertiaLink href={route('colaboradores.editar', employee.id)}>
+                <InertiaLink href={appRoute('colaboradores.editar', employee.id)}>
                   <Button variant='ghost' borderRadius='7'>
                     <Icon name='edit' />
                   </Button>

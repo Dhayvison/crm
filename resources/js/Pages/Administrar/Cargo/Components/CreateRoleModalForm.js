@@ -5,6 +5,7 @@ import Input from '@/Components/StyledInput';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { useForm } from '@inertiajs/inertia-react';
 import Icon from '@/Components/Icon';
+import { appRoute } from '@/Utils/navigation';
 
 export default function Create() {
   const modal = Modal.useState();
@@ -29,7 +30,7 @@ export default function Create() {
 
   const submit = (e) => {
     e.preventDefault();
-    post(route('roles.create'), {
+    post(appRoute('roles.create'), {
       onSuccess: () => {
         reset('name', 'wages');
         modal.hide();

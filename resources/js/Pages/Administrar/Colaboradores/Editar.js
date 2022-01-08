@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ActionButtons, Button, FieldStack } from 'bumbag';
+import { ActionButtons, FieldStack } from 'bumbag';
 import { useForm } from '@inertiajs/inertia-react';
 import Authenticated from '@/Layouts/Authenticated';
 import Input from '@/Components/StyledInput';
 import Select from '@/Components/StyledSelect';
-import Icon from '@/Components/Icon';
+import { appRoute } from '@/Utils/navigation';
 
 export default function Index(props) {
   const { auth, errors } = props;
@@ -38,7 +38,7 @@ export default function Index(props) {
 
   const submit = (e) => {
     e.preventDefault();
-    put(route('employees.update', { id: data.id }));
+    put(appRoute('employees.update', { id: data.id }));
   };
 
   React.useEffect(() => {

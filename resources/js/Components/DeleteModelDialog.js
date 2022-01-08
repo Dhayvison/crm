@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useForm } from '@inertiajs/inertia-react';
 import { Dialog, Text } from 'bumbag';
 import ValidationErrors from '@/Components/ValidationErrors';
+import { appRoute } from '@/Utils/navigation';
 
 export default function DeleteModelDialog({ routeName, title, model, modalProps }) {
   const {
@@ -14,7 +15,7 @@ export default function DeleteModelDialog({ routeName, title, model, modalProps 
   });
 
   const submit = () => {
-    destroy(route(routeName, { id: model.id }), {
+    destroy(appRoute(routeName, { id: model.id }), {
       onSuccess: () => {
         modalProps.hide();
       },

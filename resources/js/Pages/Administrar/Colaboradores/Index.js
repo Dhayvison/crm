@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Flex } from 'bumbag';
 import Authenticated from '@/Layouts/Authenticated';
 import Pagination from '@/Components/Pagination';
-
+import { appRoute } from '@/Utils/navigation';
 import CreateEmployeeModalForm from './Components/CreateEmployeeModalForm';
 import EmployeesTable from './Components/EmployeesTable';
 
@@ -15,7 +15,7 @@ export default function Index(props) {
   return (
     <Authenticated auth={auth} errors={errors} header='Colaboradores'>
       <Flex alignX='right' justifyContent='space-between'>
-        <Pagination meta={meta} route={route('administrar.colaboradores')} />
+        <Pagination meta={meta} route={appRoute('administrar.colaboradores')} />
 
         <CreateEmployeeModalForm
           roles={formData.roles}

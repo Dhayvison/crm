@@ -1,7 +1,7 @@
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { Box, Button, Container, DropdownMenu, Switch, Text, TopNav, useColorMode } from 'bumbag';
-import { endpoint } from '@/Utils/navigation';
+import { appRoute } from '@/Utils/navigation';
 import NavLink from '../Components/NavLink';
 import ApplicationLogo from '../Components/ApplicationLogo';
 
@@ -53,7 +53,7 @@ export default function Authenticated({ auth, header, children }) {
                   menu={ADMINISTRAR_MENU_ITEMS.map((menuItem) => (
                     <DropdownMenu.Item padding='0' key={menuItem.routeName}>
                       <InertiaLink
-                        href={endpoint(menuItem.routeName)}
+                        href={appRoute(menuItem.routeName)}
                         method='get'
                         className='block w-full px-4 py-2'
                       >
@@ -70,7 +70,7 @@ export default function Authenticated({ auth, header, children }) {
               <TopNav.Item
                 use={(props) => (
                   <NavLink
-                    href={endpoint('dashboard')}
+                    href={appRoute('dashboard')}
                     active={route().current('dashboard')}
                     {...props}
                   />
@@ -85,7 +85,7 @@ export default function Authenticated({ auth, header, children }) {
                   <>
                     <DropdownMenu.Item padding='0'>
                       <InertiaLink
-                        href={endpoint('logout')}
+                        href={appRoute('logout')}
                         method='post'
                         className='block w-full px-4 py-2'
                       >
