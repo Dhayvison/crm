@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { useForm } from '@inertiajs/inertia-react';
 import { Card, Stack } from 'bumbag';
+import { endpoint } from '@/Utils/navigation';
 
 export default function Login() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -29,7 +30,7 @@ export default function Login() {
   const submit = (e) => {
     e.preventDefault();
 
-    post(route('login'));
+    post(endpoint('login'));
   };
 
   return (
