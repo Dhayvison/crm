@@ -8,6 +8,9 @@ import { Card, Stack } from 'bumbag';
 import { endpoint } from '@/Utils/navigation';
 
 export default function Login() {
+  console.log('APP_ENV', process.env.APP_ENV);
+  console.log('NODE_ENV', process.env.NODE_ENV);
+
   const { data, setData, post, processing, errors, reset } = useForm({
     email: 'johndoe@example.com',
     password: '12345678',
